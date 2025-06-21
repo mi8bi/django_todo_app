@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-25 10:28+0900\n"
+"POT-Creation-Date: 2025-06-22 07:02+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,273 +18,343 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: accounts/forms.py:11
+#: todo_app/accounts/forms.py:12
 msgid "login username placeholder"
 msgstr "Username"
 
-#: accounts/forms.py:18
+#: todo_app/accounts/forms.py:19
 msgid "login password placeholder"
 msgstr "Password"
 
-#: accounts/templates/login.html:10
+#: todo_app/accounts/forms.py:34
+msgid "Email address"
+msgstr ""
+
+#: todo_app/accounts/forms.py:35
+msgid "Enter your email address"
+msgstr ""
+
+#: todo_app/accounts/templates/login.html:10
 msgid "login title page"
 msgstr "Login Page"
 
-#: accounts/templates/login.html:16
+#: todo_app/accounts/templates/login.html:16
 msgid "login title"
 msgstr "Login"
 
-#: accounts/templates/login.html:22
+#: todo_app/accounts/templates/login.html:22
 msgid "login submit"
 msgstr "Login"
 
-#: accounts/views.py:14
+#: todo_app/accounts/templates/login.html:26
+msgid "Don't have an account?"
+msgstr ""
+
+#: todo_app/accounts/templates/login.html:27
+msgid "Sign up here"
+msgstr "Don't have an account? Register here"
+
+#: todo_app/accounts/templates/login.html:30
+msgid "Didn't receive your verification email?"
+msgstr ""
+
+#: todo_app/accounts/templates/login.html:31
+msgid "Resend verification email"
+msgstr "Didn't get your verification email? Click here to resend"
+
+#: todo_app/accounts/templates/resend_verification_email.html:11
+#: todo_app/accounts/templates/resend_verification_email.html:16
+msgid "Resend Verification Email"
+msgstr ""
+
+#: todo_app/accounts/templates/resend_verification_email.html:24
+msgid ""
+"Enter your email address below and we'll send you a new verification link."
+msgstr ""
+
+#: todo_app/accounts/templates/resend_verification_email.html:36
+msgid "Resend Email"
+msgstr ""
+
+#: todo_app/accounts/templates/resend_verification_email.html:39
+msgid "Back to Login"
+msgstr ""
+
+#: todo_app/accounts/templates/resend_verification_email.html:40
+msgid "Sign Up"
+msgstr ""
+
+#: todo_app/accounts/templates/signup.html:33
+msgid ""
+"After submitting, a verification email will be sent to your email address. "
+"Please click the link in the email to activate your account."
+msgstr ""
+
+#: todo_app/accounts/templates/signup.html:36
+msgid "Don't have an account? Sign up here"
+msgstr ""
+
+#: todo_app/accounts/templates/signup.html:37
+msgid "Didn't receive your verification email? Resend verification email"
+msgstr ""
+
+#: todo_app/accounts/views.py:33
 msgid "login error msg"
 msgstr "Invalid username or password."
 
-#: todo_app/settings.py:118
+#: todo_app/accounts/views.py:40
+msgid "アカウントが有効化されていません。メール認証を完了してください。"
+msgstr ""
+
+#: todo_app/todo_app/settings.py:127
 msgid "English"
 msgstr ""
 
-#: todo_app/settings.py:119
+#: todo_app/todo_app/settings.py:128
 msgid "Japanese"
 msgstr ""
 
-#: todos/models.py:8
+#: todo_app/todos/models.py:8
 msgid "model category title"
 msgstr "Title"
 
-#: todos/models.py:17 todos/templates/todos/task_list.html:132
+#: todo_app/todos/models.py:17
+#: todo_app/todos/templates/todos/task_list.html:135
 msgid "priority low"
 msgstr "Low"
 
-#: todos/models.py:18 todos/templates/todos/task_list.html:132
+#: todo_app/todos/models.py:18
+#: todo_app/todos/templates/todos/task_list.html:135
 msgid "priority middle"
 msgstr "Middle"
 
-#: todos/models.py:19 todos/templates/todos/task_list.html:132
+#: todo_app/todos/models.py:19
+#: todo_app/todos/templates/todos/task_list.html:135
 msgid "priority high"
 msgstr "High"
 
-#: todos/models.py:23 todos/templates/todos/task_list.html:129
+#: todo_app/todos/models.py:23
+#: todo_app/todos/templates/todos/task_list.html:132
 msgid "status not completed"
 msgstr "Not Completed"
 
-#: todos/models.py:24 todos/templates/todos/task_list.html:129
+#: todo_app/todos/models.py:24
+#: todo_app/todos/templates/todos/task_list.html:132
 msgid "status progress"
 msgstr "Status"
 
-#: todos/models.py:25 todos/templates/todos/task_list.html:129
+#: todo_app/todos/models.py:25
+#: todo_app/todos/templates/todos/task_list.html:132
 msgid "status completed"
 msgstr "Completed"
 
-#: todos/models.py:29
+#: todo_app/todos/models.py:29
 msgid "model task title"
 msgstr "Title"
 
-#: todos/models.py:32
+#: todo_app/todos/models.py:32
 msgid "model task progress"
 msgstr "Progress"
 
-#: todos/models.py:39
+#: todo_app/todos/models.py:39
 msgid "model task status"
 msgstr "Status"
 
-#: todos/models.py:45
+#: todo_app/todos/models.py:45
 msgid "model task priority"
 msgstr "Priority"
 
-#: todos/models.py:52
+#: todo_app/todos/models.py:52
 msgid "model task category"
 msgstr "Category"
 
-#: todos/models.py:54
+#: todo_app/todos/models.py:54
 msgid "model task description"
 msgstr "Description"
 
-#: todos/models.py:58
+#: todo_app/todos/models.py:58
 msgid "model task start_date"
 msgstr "Start Date"
 
-#: todos/models.py:61
+#: todo_app/todos/models.py:61
 msgid "model task due_date"
 msgstr "Due Date"
 
-#: todos/templates/header.html:7
+#: todo_app/todos/templates/header.html:7
 msgid "menu home"
 msgstr "Home"
 
-#: todos/templates/header.html:8
+#: todo_app/todos/templates/header.html:8
 msgid "menu task"
 msgstr "Tasks"
 
-#: todos/templates/header.html:9
+#: todo_app/todos/templates/header.html:9
 msgid "menu board"
 msgstr "Board"
 
-#: todos/templates/header.html:10
+#: todo_app/todos/templates/header.html:10
 msgid "menu gantt"
 msgstr "Gantt"
 
-#: todos/templates/header.html:36
+#: todo_app/todos/templates/header.html:36
 msgid "logout"
 msgstr "Logout"
 
-#: todos/templates/todos/home.html:7
+#: todo_app/todos/templates/todos/home.html:7
 msgid "home title page"
 msgstr "Home"
 
-#: todos/templates/todos/home.html:18
+#: todo_app/todos/templates/todos/home.html:18
 msgid "home graph title"
 msgstr "Task Graph"
 
-#: todos/templates/todos/task_add_form.html:7
+#: todo_app/todos/templates/todos/task_add_form.html:7
 msgid "task add title page"
 msgstr "Add"
 
-#: todos/templates/todos/task_add_form.html:16
+#: todo_app/todos/templates/todos/task_add_form.html:16
 msgid "task add title"
 msgstr "Add Task"
 
-#: todos/templates/todos/task_add_form.html:59
+#: todo_app/todos/templates/todos/task_add_form.html:59
 msgid "add submit btn"
 msgstr "Add"
 
-#: todos/templates/todos/task_add_form.html:60
+#: todo_app/todos/templates/todos/task_add_form.html:60
 msgid "add cancel btn"
 msgstr "Cancel"
 
-#: todos/templates/todos/task_board.html:7
+#: todo_app/todos/templates/todos/task_board.html:7
 msgid "board title page"
 msgstr "Board"
 
-#: todos/templates/todos/task_board.html:20
+#: todo_app/todos/templates/todos/task_board.html:20
 msgid "board not-completed title"
 msgstr "Not Completed"
 
-#: todos/templates/todos/task_board.html:35
-#: todos/templates/todos/task_board.html:57
-#: todos/templates/todos/task_board.html:79
+#: todo_app/todos/templates/todos/task_board.html:35
+#: todo_app/todos/templates/todos/task_board.html:57
+#: todo_app/todos/templates/todos/task_board.html:79
 msgid "borad priority low"
 msgstr "Priority:Low"
 
-#: todos/templates/todos/task_board.html:35
-#: todos/templates/todos/task_board.html:57
-#: todos/templates/todos/task_board.html:79
+#: todo_app/todos/templates/todos/task_board.html:35
+#: todo_app/todos/templates/todos/task_board.html:57
+#: todo_app/todos/templates/todos/task_board.html:79
 msgid "borad priority middle"
 msgstr "Priority:Middle"
 
-#: todos/templates/todos/task_board.html:35
-#: todos/templates/todos/task_board.html:57
-#: todos/templates/todos/task_board.html:79
+#: todo_app/todos/templates/todos/task_board.html:35
+#: todo_app/todos/templates/todos/task_board.html:57
+#: todo_app/todos/templates/todos/task_board.html:79
 msgid "board priority high"
 msgstr "Priority:High"
 
-#: todos/templates/todos/task_board.html:42
+#: todo_app/todos/templates/todos/task_board.html:42
 msgid "board progress title"
 msgstr "Progress"
 
-#: todos/templates/todos/task_board.html:64
+#: todo_app/todos/templates/todos/task_board.html:64
 msgid "board completed title"
 msgstr "Completed"
 
-#: todos/templates/todos/task_confirm_delete.html:7
+#: todo_app/todos/templates/todos/task_confirm_delete.html:7
 msgid "delete confirm title page"
 msgstr "Delete"
 
-#: todos/templates/todos/task_confirm_delete.html:16
+#: todo_app/todos/templates/todos/task_confirm_delete.html:16
 msgid "delete task title"
 msgstr "Delete"
 
-#: todos/templates/todos/task_confirm_delete.html:19
+#: todo_app/todos/templates/todos/task_confirm_delete.html:19
 #, python-format
 msgid "delete confirm msg %(object)s "
 msgstr "Do you really want to delete the data \"%(object)s\"?"
 
-#: todos/templates/todos/task_confirm_delete.html:21
+#: todo_app/todos/templates/todos/task_confirm_delete.html:21
 msgid "delete confirm submit"
 msgstr "Yes"
 
-#: todos/templates/todos/task_confirm_delete.html:22
+#: todo_app/todos/templates/todos/task_confirm_delete.html:22
 msgid "delete confirm cancel"
 msgstr "Cancel"
 
-#: todos/templates/todos/task_gantt.html:7
+#: todo_app/todos/templates/todos/task_gantt.html:7
 msgid "gantt title page"
 msgstr "Gantt"
 
-#: todos/templates/todos/task_list.html:7
+#: todo_app/todos/templates/todos/task_list.html:7
 msgid "task_list title page"
 msgstr "Login Page"
 
-#: todos/templates/todos/task_list.html:20
+#: todo_app/todos/templates/todos/task_list.html:20
 msgid "search title"
 msgstr "Search"
 
-#: todos/templates/todos/task_list.html:39
+#: todo_app/todos/templates/todos/task_list.html:39
 msgid "search btn"
 msgstr "Search"
 
-#: todos/templates/todos/task_list.html:40
+#: todo_app/todos/templates/todos/task_list.html:40
 msgid "search clear btn"
 msgstr "Clear"
 
-#: todos/templates/todos/task_list.html:55
+#: todo_app/todos/templates/todos/task_list.html:55
 msgid "column status"
 msgstr "Status"
 
-#: todos/templates/todos/task_list.html:62
+#: todo_app/todos/templates/todos/task_list.html:62
 msgid "column priority"
 msgstr "Priority"
 
-#: todos/templates/todos/task_list.html:68
+#: todo_app/todos/templates/todos/task_list.html:70
 msgid "column progress"
 msgstr "Progress"
 
-#: todos/templates/todos/task_list.html:76
+#: todo_app/todos/templates/todos/task_list.html:79
 msgid "column title"
 msgstr "Title"
 
-#: todos/templates/todos/task_list.html:85
+#: todo_app/todos/templates/todos/task_list.html:88
 msgid "column category"
 msgstr "Category"
 
-#: todos/templates/todos/task_list.html:94
+#: todo_app/todos/templates/todos/task_list.html:97
 msgid "column description"
 msgstr "Description"
 
-#: todos/templates/todos/task_list.html:103
+#: todo_app/todos/templates/todos/task_list.html:106
 msgid "column start_date"
 msgstr "Start Date"
 
-#: todos/templates/todos/task_list.html:112
+#: todo_app/todos/templates/todos/task_list.html:115
 msgid "column due_date"
 msgstr "Due Date"
 
-#: todos/templates/todos/task_list.html:118
+#: todo_app/todos/templates/todos/task_list.html:121
 msgid "column delete"
 msgstr "Delete"
 
-#: todos/templates/todos/task_list.html:172
+#: todo_app/todos/templates/todos/task_list.html:175
 msgid "new task btn"
 msgstr "New Task"
 
-#: todos/templates/todos/task_list.html:173
+#: todo_app/todos/templates/todos/task_list.html:176
 msgid "delete all btn"
 msgstr "Delete Selected Tasks"
 
-#: todos/templates/todos/task_update_form.html:7
+#: todo_app/todos/templates/todos/task_update_form.html:7
 msgid "update task title page"
 msgstr "Task Details"
 
-#: todos/templates/todos/task_update_form.html:16
+#: todo_app/todos/templates/todos/task_update_form.html:16
 msgid "update task title"
 msgstr "Task Details"
 
-#: todos/templates/todos/task_update_form.html:59
+#: todo_app/todos/templates/todos/task_update_form.html:60
 msgid "update btn"
 msgstr "Update"
 
-#: todos/templates/todos/task_update_form.html:60
+#: todo_app/todos/templates/todos/task_update_form.html:61
 msgid "cancel btn"
 msgstr "Cancel"

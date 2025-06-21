@@ -62,3 +62,22 @@ button:hover {
 .error {
     color: red;
 }
+
+.login-links {
+    margin-top: 2em;
+    font-size: 1rem;
+}
+.login-links p {
+    margin: 0.5em 0;
+}
+.login-links a {
+    color: #1976d2;
+    text-decoration: underline;
+    margin-left: 0.5em;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+.login-links a:hover {
+    color: #0d47a1;
+    text-decoration: none;
+}

@@ -1,4 +1,5 @@
 from django.contrib.auth.views import LoginView
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render
 from .forms import SignUpForm
@@ -32,13 +33,23 @@ class AccountLoginView(LoginView):
         context["error_msg"] = _("login error msg")
         return self.render_to_response(context)
 
+    def form_valid(self, form):
+        user = form.get_user()
+        if not user.is_active:
+            context = self.get_context_data()
+            context["error_msg"] = _("アカウントが有効化されていません。メール認証を完了してください。")
+            return self.render_to_response(context)
+        return super().form_valid(form)
+
 
 def send_verification_email(user, request):
     current_site = get_current_site(request)
     mail_subject = 'Activate your account'
     serializer = get_verification_serializer()
     token = serializer.dumps(user.email)
-    activation_link = f"{request.scheme}://{current_site.domain}/accounts/activate/{token}/"
+    # reverseでURLを生成（i18n_patterns対応）
+    activation_path = reverse('accounts:activate', kwargs={'token': token})
+    activation_link = f"{request.scheme}://{current_site.domain}{activation_path}"
 
     message = render_to_string('activation_email.html', {
         'user': user,
@@ -77,22 +88,22 @@ def activate_account(request, token):
         user = User.objects.get(email=email)
         if user.is_active:
             messages.info(request, "アカウントは既に有効化されています。")
+            return render(request, "activation_complete.html", {"already_active": True})
         else:
             user.is_active = True
             user.save()
             messages.success(request, "アカウントが有効化されました！ログインしてください。")
-        return redirect('accounts:login')
-
+            return render(request, "activation_complete.html", {"already_active": False})
     except SignatureExpired:
         messages.error(request, "確認リンクの有効期限が切れています。新しい確認メールをリクエストしてください。")
         return redirect('accounts:resend_verification_email')
-    except BadTimeSignature: # Covers BadSignature, BadData
+    except BadTimeSignature:
         messages.error(request, "確認リンクが無効です。")
         return redirect('accounts:signup')
     except User.DoesNotExist:
         messages.error(request, "アカウントが見つかりません。再度登録をお試しください。")
         return redirect('accounts:signup')
-    except Exception: # Catch any other unexpected errors
+    except Exception:
         messages.error(request, "アカウントの有効化中にエラーが発生しました。")
         return redirect('accounts:signup')
 
