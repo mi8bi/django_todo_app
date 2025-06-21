@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.conf.urls.i18n import i18n_patterns
 from django.urls import include, path
 from django.shortcuts import redirect
+from django.conf import settings
 
 
 def root_redirect(request):
@@ -27,7 +28,12 @@ def root_redirect(request):
 
 urlpatterns = i18n_patterns(
     path("", root_redirect, name="root_redirect"),
-    path("admin/", admin.site.urls),
+    # 本番環境(RENDER=true)ではadminを非表示
+    *(
+        [path("admin/", admin.site.urls)]
+        if settings.DEBUG
+        else []
+    ),
     path("accounts/", include("accounts.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
     path("todos/", include("todos.urls")),
