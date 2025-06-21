@@ -82,6 +82,10 @@ ANYMAIL = {
     "MAILERSEND_API_TOKEN": "mlsn.ff8da7e5881aa54d30ed731f7a9ee48fb3675904b71f07ae6b493eadbcb19956",
 }
 
+# Email Verification
+EMAIL_VERIFICATION_SALT = "email-verification-salt" # Consider moving to environment variable for production
+EMAIL_VERIFICATION_TOKEN_MAX_AGE_SECONDS = 86400  # 24 hours
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 

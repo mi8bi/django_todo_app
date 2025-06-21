@@ -27,5 +27,14 @@
             </ul>
         </div>
     {% endif %}
+
+    <p style="margin-top: 20px;">
+        {% load i18n %}
+        {% trans "After submitting, a verification email will be sent to your email address. Please click the link in the email to activate your account." %}
+    </p>
+    <div style="margin-top: 10px;">
+        <a href="{% url 'accounts:login' %}">{% trans 'Already have an account? Login' %}</a><br>
+        <a href="{% url 'accounts:resend_verification_email' %}">{% trans "Didn't receive your verification email?" %}</a>
+    </div>
 </body>
 </html>

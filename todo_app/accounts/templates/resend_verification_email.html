@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block stylesheet %}
+{# Assuming a similar CSS file might be needed or that base styles are sufficient #}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block title %}{% trans 'Resend Verification Email' %}{% endblock %}
+
+{% block content %}
+<main class="container">
+    <div class="card">
+        <h2>{% trans 'Resend Verification Email' %}</h2>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        <p>{% trans "Enter your email address below and we'll send you a new verification link." %}</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="error">
+                    {% for error in form.email.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <button type="submit">{% trans 'Resend Email' %}</button>
+        </form>
+        <p class="mt-3">
+            <a href="{% url 'accounts:login' %}">{% trans 'Back to Login' %}</a> |
+            <a href="{% url 'accounts:signup' %}">{% trans 'Sign Up' %}</a>
+        </p>
+    </div>
+</main>
+
+{% include "footer.html" %}
+
+{% endblock %}

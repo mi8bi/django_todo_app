@@ -27,3 +27,10 @@ class SignUpForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ("username", "email", "password")
+
+
+class ResendVerificationEmailForm(forms.Form):
+    email = forms.EmailField(
+        label=_("Email address"),
+        widget=forms.EmailInput(attrs={"class": "form-control", "placeholder": _("Enter your email address")})
+    )
