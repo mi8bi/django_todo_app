@@ -84,8 +84,8 @@ def activate_account(request, token):
         return redirect('accounts:login')
 
     except SignatureExpired:
-        messages.error(request, "確認リンクの有効期限が切れています。再度登録をお試しください。") # Later: resend link
-        return redirect('accounts:signup') # Later: redirect to a page to request new link
+        messages.error(request, "確認リンクの有効期限が切れています。新しい確認メールをリクエストしてください。")
+        return redirect('accounts:resend_verification_email')
     except BadTimeSignature: # Covers BadSignature, BadData
         messages.error(request, "確認リンクが無効です。")
         return redirect('accounts:signup')
