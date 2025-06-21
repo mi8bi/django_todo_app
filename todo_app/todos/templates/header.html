@@ -1,0 +1,44 @@
+{% load static %}
+
+{% load i18n %}
+
+<header>
+    <ul>
+        <li><a href="{% url 'todos:home' %}">{% trans 'menu home' %}</a></li>
+        <li><a href="{% url 'todos:task_list' %}">{% trans 'menu task' %}</a></li>
+        <li><a href="{% url 'todos:board' %}">{% trans 'menu board' %}</a></li>
+        <li><a href="{% url 'todos:gantt' %}">{% trans 'menu gantt' %}</a></li>
+    </ul>
+
+    <div class="right-menu">
+        <form id="language-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            <select id="language-select" name="language">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                        {{ language.name_local }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+
+        <div class="dropdown">
+            <p class="dropbtn">
+                <img src="{% static 'images/person-circle.svg' %}" alt="person">
+                {{ user.username }}
+            </p>
+            <div class="dropdown-content">
+                <form action="{% url 'accounts:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">{% trans 'logout' %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+<script src="{% static 'js/header.js' %}"></script>

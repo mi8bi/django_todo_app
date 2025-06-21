@@ -1,0 +1,23 @@
+footer {
+    display: flex;
+    justify-content: right;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #009879;
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#language-select {
+    cursor: pointer;
+    width: 120px;
+    height: 32px;
+    border: solid 1px #c0c0c0;
+    background: #fff url("/static/images/globe.svg") no-repeat center left 8px;
+    text-align: center;
+    border-radius: 8px;
+}

@@ -1,0 +1,10 @@
+{% autoescape off %}
+Hi {{ user.username }},
+
+Thanks for signing up!
+
+Please click the link below to verify your email and activate your account:
+{{ activation_link }}
+
+If you didn't register, ignore this email.
+{% endautoescape %}

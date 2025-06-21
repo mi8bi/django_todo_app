@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-25 10:28+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: accounts/forms.py:11
+msgid "login username placeholder"
+msgstr "ユーザ名"
+
+#: accounts/forms.py:18
+msgid "login password placeholder"
+msgstr "パスワード"
+
+#: accounts/templates/login.html:10
+msgid "login title page"
+msgstr "ログイン"
+
+#: accounts/templates/login.html:16
+msgid "login title"
+msgstr "ログイン"
+
+#: accounts/templates/login.html:22
+msgid "login submit"
+msgstr "ログイン"
+
+#: accounts/views.py:14
+msgid "login error msg"
+msgstr "ユーザ名もしくはパスワードが誤っています。"
+
+#: todo_app/settings.py:118
+msgid "English"
+msgstr ""
+
+#: todo_app/settings.py:119
+msgid "Japanese"
+msgstr ""
+
+#: todos/models.py:8
+msgid "model category title"
+msgstr "タイトル"
+
+#: todos/models.py:17 todos/templates/todos/task_list.html:132
+msgid "priority low"
+msgstr "低"
+
+#: todos/models.py:18 todos/templates/todos/task_list.html:132
+msgid "priority middle"
+msgstr "中"
+
+#: todos/models.py:19 todos/templates/todos/task_list.html:132
+msgid "priority high"
+msgstr "高"
+
+#: todos/models.py:23 todos/templates/todos/task_list.html:129
+msgid "status not completed"
+msgstr "未完了"
+
+#: todos/models.py:24 todos/templates/todos/task_list.html:129
+msgid "status progress"
+msgstr "進行中"
+
+#: todos/models.py:25 todos/templates/todos/task_list.html:129
+msgid "status completed"
+msgstr "完了"
+
+#: todos/models.py:29
+msgid "model task title"
+msgstr "タイトル"
+
+#: todos/models.py:32
+msgid "model task progress"
+msgstr "進捗率"
+
+#: todos/models.py:39
+msgid "model task status"
+msgstr "ステータス"
+
+#: todos/models.py:45
+msgid "model task priority"
+msgstr "優先度"
+
+#: todos/models.py:52
+msgid "model task category"
+msgstr "カテゴリー"
+
+#: todos/models.py:54
+msgid "model task description"
+msgstr "説明"
+
+#: todos/models.py:58
+msgid "model task start_date"
+msgstr "開始予定日"
+
+#: todos/models.py:61
+msgid "model task due_date"
+msgstr "締切日"
+
+#: todos/templates/header.html:7
+msgid "menu home"
+msgstr "ホーム"
+
+#: todos/templates/header.html:8
+msgid "menu task"
+msgstr "タスク一覧"
+
+#: todos/templates/header.html:9
+msgid "menu board"
+msgstr "ボード"
+
+#: todos/templates/header.html:10
+msgid "menu gantt"
+msgstr "ガントチャート"
+
+#: todos/templates/header.html:36
+msgid "logout"
+msgstr "ログアウト"
+
+#: todos/templates/todos/home.html:7
+msgid "home title page"
+msgstr "ホーム"
+
+#: todos/templates/todos/home.html:18
+msgid "home graph title"
+msgstr "タスク"
+
+#: todos/templates/todos/task_add_form.html:7
+msgid "task add title page"
+msgstr "新規タスク"
+
+#: todos/templates/todos/task_add_form.html:16
+msgid "task add title"
+msgstr "新規タスク"
+
+#: todos/templates/todos/task_add_form.html:59
+msgid "add submit btn"
+msgstr "追加"
+
+#: todos/templates/todos/task_add_form.html:60
+msgid "add cancel btn"
+msgstr "キャンセル"
+
+#: todos/templates/todos/task_board.html:7
+msgid "board title page"
+msgstr "ボード"
+
+#: todos/templates/todos/task_board.html:20
+msgid "board not-completed title"
+msgstr "未完了"
+
+#: todos/templates/todos/task_board.html:35
+#: todos/templates/todos/task_board.html:57
+#: todos/templates/todos/task_board.html:79
+msgid "borad priority low"
+msgstr "優先度:低"
+
+#: todos/templates/todos/task_board.html:35
+#: todos/templates/todos/task_board.html:57
+#: todos/templates/todos/task_board.html:79
+msgid "borad priority middle"
+msgstr "優先度:中"
+
+#: todos/templates/todos/task_board.html:35
+#: todos/templates/todos/task_board.html:57
+#: todos/templates/todos/task_board.html:79
+msgid "board priority high"
+msgstr "優先度:高"
+
+#: todos/templates/todos/task_board.html:42
+msgid "board progress title"
+msgstr "進行中"
+
+#: todos/templates/todos/task_board.html:64
+msgid "board completed title"
+msgstr "完了"
+
+#: todos/templates/todos/task_confirm_delete.html:7
+msgid "delete confirm title page"
+msgstr "削除"
+
+#: todos/templates/todos/task_confirm_delete.html:16
+msgid "delete task title"
+msgstr "削除"
+
+#: todos/templates/todos/task_confirm_delete.html:19
+#, python-format
+msgid "delete confirm msg %(object)s "
+msgstr "本当にデータ「%(object)s」を削除しますか？"
+
+#: todos/templates/todos/task_confirm_delete.html:21
+msgid "delete confirm submit"
+msgstr "はい"
+
+#: todos/templates/todos/task_confirm_delete.html:22
+msgid "delete confirm cancel"
+msgstr "キャンセル"
+
+#: todos/templates/todos/task_gantt.html:7
+msgid "gantt title page"
+msgstr "ガントチャート"
+
+#: todos/templates/todos/task_list.html:7
+msgid "task_list title page"
+msgstr "タスク一覧"
+
+#: todos/templates/todos/task_list.html:20
+msgid "search title"
+msgstr "検索条件"
+
+#: todos/templates/todos/task_list.html:39
+msgid "search btn"
+msgstr "検索"
+
+#: todos/templates/todos/task_list.html:40
+msgid "search clear btn"
+msgstr "クリア"
+
+#: todos/templates/todos/task_list.html:55
+msgid "column status"
+msgstr "ステータス"
+
+#: todos/templates/todos/task_list.html:62
+msgid "column priority"
+msgstr "優先度"
+
+#: todos/templates/todos/task_list.html:68
+msgid "column progress"
+msgstr "進捗率"
+
+#: todos/templates/todos/task_list.html:76
+msgid "column title"
+msgstr "タイトル"
+
+#: todos/templates/todos/task_list.html:85
+msgid "column category"
+msgstr "カテゴリー"
+
+#: todos/templates/todos/task_list.html:94
+msgid "column description"
+msgstr "説明"
+
+#: todos/templates/todos/task_list.html:103
+msgid "column start_date"
+msgstr "開始予定日"
+
+#: todos/templates/todos/task_list.html:112
+msgid "column due_date"
+msgstr "締切日"
+
+#: todos/templates/todos/task_list.html:118
+msgid "column delete"
+msgstr "削除"
+
+#: todos/templates/todos/task_list.html:172
+msgid "new task btn"
+msgstr "新規タスク"
+
+#: todos/templates/todos/task_list.html:173
+msgid "delete all btn"
+msgstr "全削除"
+
+#: todos/templates/todos/task_update_form.html:7
+msgid "update task title page"
+msgstr "タスク詳細"
+
+#: todos/templates/todos/task_update_form.html:16
+msgid "update task title"
+msgstr "タスク詳細"
+
+#: todos/templates/todos/task_update_form.html:59
+msgid "update btn"
+msgstr "更新"
+
+#: todos/templates/todos/task_update_form.html:60
+msgid "cancel btn"
+msgstr "キャンセル"

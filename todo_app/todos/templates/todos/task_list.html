@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% load static %}
+
+{% block title %}{% trans 'task_list title page' %}{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+<link rel="stylesheet" href="{% static 'css/task_list.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "header.html" %}
+
+<main>
+
+    <div class="form-search-container">
+        <h3><img src="{% static 'images/search.svg' %}" alt="search">{% trans 'search title' %}</h3>
+        <form class="form-search" method="post">
+            {% csrf_token %}
+            <div class="form-search-control">
+                {{ search_form.status.label_tag }}
+                {{ search_form.status }}
+            </div>
+            <div class="form-search-control">
+                {{ search_form.priority.label_tag }}
+                {{ search_form.priority }}
+            </div>
+            <div class="form-search-control">
+                {{ search_form.title.label_tag }}
+                {{ search_form.title }}
+            </div>
+            <div class="form-search-control">
+                {{ search_form.category.label_tag }}
+                {{ search_form.category }}
+            </div>
+            <button type="submit" name="search_action" value="search"><img src="{% static 'images/search.svg' %}" alt="search">{% trans 'search btn' %}</button>
+            <button type="submit" name="search_action" value="clear">{% trans 'search clear btn' %}</button>
+        </form>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="table-container">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th width="5%"><input type="checkbox" id="checksAll"></th>
+                        <th width="15%">
+                            <a
+                                href="?sort=status&order={% if sort_by == 'status' and order == 'asc' %}desc{% else %}asc{% endif %}">
+                                {% trans 'column status' %}
+                                {% if sort_by == 'status' %}
+                                {% if order == "asc" %}▲{% else %}▼{% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                        <th width="5%">
+                            {% trans 'column priority' %}
+                            {% if sort_by == 'priority' %}
+                            {% if order == "asc" %}▲{% else %}▼{% endif %}
+                            {% endif %}
+                        </th>
+                        <th width="10%">
+                            <a
+                                href="?sort=progress&order={% if sort_by == 'progress' and order == 'asc' %}desc{% else %}asc{% endif %}">
+                                {% trans 'column progress' %}
+                                {% if sort_by == 'progress' %}
+                                {% if order == "asc" %}▲{% else %}▼{% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                        <th width="10%">
+                            <a
+                                href="?sort=title&order={% if sort_by == 'title' and order == 'asc' %}desc{% else %}asc{% endif %}">
+                                {% trans 'column title' %}
+                                {% if sort_by == 'title' %}
+                                {% if order == "asc" %}▲{% else %}▼{% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                        <th width="10%">
+                            <a
+                                href="?sort=category&order={% if sort_by == 'category' and order == 'asc' %}desc{% else %}asc{% endif %}">
+                                {% trans 'column category' %}
+                                {% if sort_by == 'category' %}
+                                {% if order == "asc" %}▲{% else %}▼{% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                        <th width="10%">
+                            <a
+                                href="?sort=description&order={% if sort_by == 'description' and order == 'asc' %}desc{% else %}asc{% endif %}">
+                                {% trans 'column description' %}
+                                {% if sort_by == 'description' %}
+                                {% if order == "asc" %}▲{% else %}▼{% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                        <th width="15%">
+                            <a
+                                href="?sort=start_date&order={% if sort_by == 'start_date' and order == 'asc' %}desc{% else %}asc{% endif %}">
+                                {% trans 'column start_date' %}
+                                {% if sort_by == 'start_date' %}
+                                {% if order == "asc" %}▲{% else %}▼{% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                        <th width="15%">
+                            <a
+                                href="?sort=due_date&order={% if sort_by == 'due_date' and order == 'asc' %}desc{% else %}asc{% endif %}">
+                                {% trans 'column due_date' %}
+                                {% if sort_by == 'due_date' %}
+                                {% if order == "asc" %}▲{% else %}▼{% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                        <th width="5%">{% trans 'column delete' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in task_list %}
+                    <tr>
+                        <td>
+                            <input class="checks" type="checkbox" name="tasks" value="{{ task.pk }}">
+                        </td>
+                        <td
+                            data-href="{% url 'todos:task_update' task.pk %}">
+                            <span class="{% if task.status == 'COMPLETED' %}completed{% elif task.status == 'PROGRESS' %}progress{% else %}not-completed{% endif %}">{% if task.status == "COMPLETED" %}{% trans 'status completed' %}{% elif task.status == "PROGRESS" %}{% trans 'status progress' %}{% else %}{% trans 'status not completed' %}{% endif %}</span></td>
+                        <td
+                            data-href="{% url 'todos:task_update' task.pk %}">
+                            <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">{% if task.priority == "LOW" %}{% trans 'priority low' %}{% elif task.priority == "MIDDLE" %}{% trans 'priority middle' %}{% else %}{% trans 'priority high' %}{% endif %}</span></td>
+                        <td data-href="{% url 'todos:task_update' task.pk %}">{{ task.progress }} %</td>
+                        <td class="left" data-href="{% url 'todos:task_update' task.pk %}">{{ task.title | truncatechars:20 }}</td>
+                        <td data-href="{% url 'todos:task_update' task.pk %}">{{ task.category }}</td>
+                        <td class="left" data-href="{% url 'todos:task_update' task.pk %}">{{ task.description | truncatechars:20 }}</td>
+                        <td data-href="{% url 'todos:task_update' task.pk %}">{{ task.start_date }}</td>
+                        <td data-href="{% url 'todos:task_update' task.pk %}">{{ task.due_date }}</td>
+                        <td class="actions">
+                            <div class="delete">
+                                <a href="{% url 'todos:task_delete' task.pk %}"><img
+                                        src="{% static 'images/trash.svg' %}" alt="trash"></a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="pagination-container">
+                <div class="pagination">
+                    {% if page_obj.has_previous %}
+                    <a href="?sort={{ sort_by }}&order={{ order }}&page=1">&laquo;&laquo;</a>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <a class="active" href="?sort={{ sort_by }}&order={{ order }}&page={{ num }}">{{ num }}</a>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a
+                        href="?&sort={{ sort_by }}&order={{ order }}&page={{ num }}">{{ num }}</a>
+                        {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                        <a
+                            href="?sort={{ sort_by }}&order={{ order }}&page={{ page_obj.paginator.num_pages }}">&raquo;&raquo;</a>
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="action-container">
+            <a href="{% url 'todos:task_add' %}">{% trans 'new task btn' %}</a>
+            <button type="submit">{% trans 'delete all btn' %}</button>
+        </div>
+
+    </form>
+
+</main>
+
+<script src="{% static 'js/task_list.js' %}"></script>
+
+{% endblock %}

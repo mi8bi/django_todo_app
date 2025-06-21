@@ -1,0 +1,5 @@
+asgiref==3.8.1
+Django==5.1.6
+sqlparse==0.5.3
+django-import-export==4.3.7
+django-anymail==13.0

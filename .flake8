@@ -1,0 +1,7 @@
+# Flake8とBlackの併用
+# https://black.readthedocs.io/en/stable/guides/using_black_with_other_tools.html#bugbear
+# https://zenn.dev/tanny/articles/cdb555d6124a2a
+[flake8]
+max-line-length = 80
+extend-select = B950
+extend-ignore = E203,E501,E701

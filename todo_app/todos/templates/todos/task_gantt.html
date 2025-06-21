@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% load static %}
+
+{% block title %}{% trans 'gantt title page' %}{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/frappe-gantt.css' %}">
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "header.html" %}
+
+<main>
+    <div id="gantt">
+    </div>
+</main>
+
+<script src="{% static 'js/frappe-gantt.umd.js' %}"></script>
+<script src="{% static 'js/task_gantt.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f5f5f5;
+    color: #333;
+}
+
+main {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.form-container {
+    min-width: 520px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border: solid 1px #c0c0c0;
+    overflow: hidden;
+}
+
+.form-title {
+    text-align: center;
+    margin: 0;
+    padding: 8px;
+    background-color: #009879;
+    color: #fff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin: 16px 24px 16px 24px;
+}
+
+form p {
+    text-align: center;
+}
+
+.form-action {
+    margin: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    column-gap: 116px;
+}
+
+.form-action input {
+    width: 96px;
+    background-color: #009879;
+    color: #fff;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-size: large;
+}
+
+.form-action input:hover {
+    background-color: #0f7b65;
+}
+
+.form-action a {
+    text-align: center;
+    text-decoration: none;
+    background-color: #555;
+    width: 96px;
+    color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.form-action a:hover {
+    background-color: #666;
+}

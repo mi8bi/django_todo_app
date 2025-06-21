@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'delete confirm title page' %}{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/task_delete_form.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="form-container">
+        <h2 class="form-title">{% trans 'delete task title' %}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <p>{% blocktrans with object=object %}delete confirm msg {{ object }} {% endblocktrans %}</p>
+            <div class="form-action">
+                <input type="submit" value="{% trans 'delete confirm submit' %}">
+                <a href="{{request.META.HTTP_REFERER}}">{% trans 'delete confirm cancel' %}</a>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

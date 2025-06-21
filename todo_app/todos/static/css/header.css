@@ -1,0 +1,113 @@
+header {
+    min-width: 1200px;
+    color: #fff;
+    background-color: #009879;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+header ul li {
+    display: block;
+    padding: 16px;
+    list-style:none;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+header ul li:hover {
+    background-color: #0f7b65;
+}
+
+header li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    padding: 10px;
+}
+
+.right-menu {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+}
+
+.login-username {
+    display: flex;
+    justify-content: center;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.login-username img {
+    margin-right: 8px;
+}
+
+#language-select {
+    cursor: pointer;
+    width: 120px;
+    height: 32px;
+    border: solid 1px #c0c0c0;
+    background: #fff url("/static/images/globe.svg") no-repeat center left 8px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.dropdown {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 16px;
+}
+.dropdown:hover {
+    background-color: #0f7b65;
+}
+.dropdown-content {
+    right: 4px;
+    width: 120px;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content form {
+    color: black;
+    display: block;
+}
+.dropdown-content form button {
+    background-color: #f9f9f9;
+    cursor: pointer;
+    padding: 12px 16px;
+    border: none;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropbtn img{
+    margin-right: 8px;
+}

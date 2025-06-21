@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% load static %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block title %}{% trans 'login title page' %}{% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <div class="card">
+        <h2>{% trans 'login title' %}</h2>
+        <p class="error">{{ error_msg }}</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.username }}
+            {{ form.password }}
+            <button type="submit">{% trans 'login submit' %}</button>
+        </form>
+    </div>
+</main>
+
+{% include "footer.html" %}
+
+{% endblock %}

@@ -1,0 +1,66 @@
+from django import forms
+from django.core.exceptions import ValidationError
+from django.utils.timezone import now
+from datetime import date, timedelta
+from .models import Task
+
+
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = [
+            "title",
+            "category",
+            "progress",
+            "description",
+            "start_date",
+            "due_date",
+            "status",
+            "priority",
+        ]
+        widgets = {
+            "start_date": forms.DateInput(
+                attrs={"type": "date", "min": date.today().isoformat()}
+            ),
+            "due_date": forms.DateInput(
+                attrs={"type": "date", "min": date.today().isoformat()}
+            ),
+        }
+
+    def clean_start_date(self):
+        start_date = self.cleaned_data.get("start_date")
+        if start_date < now() - timedelta(days=1):
+            raise ValidationError("Due date cannot be in the past.")
+        return start_date
+
+    def clean_due_date(self):
+        due_date = self.cleaned_data.get("due_date")
+        if due_date < now() - timedelta(days=1):
+            raise ValidationError("Due date cannot be in the past.")
+        return due_date
+
+    def clean(self):
+        start_date = self.cleaned_data.get("start_date")
+        due_date = self.cleaned_data.get("due_date")
+        if not start_date < due_date:
+            raise ValidationError("The scheduled start date is past the deadline.")
+        return self.cleaned_data
+
+
+class TaskSearchForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ["title", "category", "status", "priority"]
+
+    def __init__(self, *args, **kwargs):
+        super(TaskSearchForm, self).__init__(*args, **kwargs)
+        self.fields["title"].required = False
+        self.fields["category"].required = False
+        self.fields["status"].required = False
+        self.fields["priority"].required = False
+
+
+class TaskBulkDeleteForm(forms.Form):
+    tasks = forms.ModelMultipleChoiceField(
+        queryset=Task.objects.all(), widget=forms.CheckboxSelectMultiple
+    )

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% load static %}
+
+{% block title %}{% trans 'board title page' %}{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+<link rel="stylesheet" href="{% static 'css/task_board.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "header.html" %}
+
+<main>
+    <div class="board-container">
+        <div class="board not-completed-container">
+            <h3 class="board-title board-title-not-completed">{% trans 'board not-completed title' %}</h3>
+            <hr>
+            <ul id="not-completed-items" class="items">
+                {% for task in notCompletedTasks %}
+                    <li class="board-item" value="{{ task.id }}" data-href="{% url 'todos:task_update' task.pk %}">
+                        <img class="handle" src="{% static 'images/grip-vertical.svg' %}" alt="handle">
+                        <div class="v-line"></div>
+                        <div class="board-item-content">
+                            <div class="board-item-title">
+                                {{ task.title|truncatechars:20 }}
+                            </div>
+                            <div class="board-item-description">
+                                {{ task.description | truncatechars:20 }}
+                            </div>
+                            <div class="spacer"></div>
+                            <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">{% if task.priority == "LOW" %}{% trans 'borad priority low' %}{% elif task.priority == "MIDDLE" %}{% trans 'borad priority middle' %}{% else %}{% trans 'board priority high' %}{% endif %}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="board progress-container">
+            <h3 class="board-title board-title-progress">{% trans 'board progress title' %}</h3>
+            <hr>
+            <ul id="progress-items" class="items">
+                {% for task in progressTasks %}
+                    <li class="board-item" value="{{ task.id }}" data-href="{% url 'todos:task_update' task.pk %}">
+                        <img class="handle" src="{% static 'images/grip-vertical.svg' %}" alt="handle">
+                        <div class="v-line"></div>
+                        <div class="board-item-content">
+                            <div class="board-item-title">
+                                {{ task.title|truncatechars:20 }}
+                            </div>
+                            <div class="board-item-description">
+                                {{ task.description|truncatechars:20 }}
+                            </div>
+                            <div class="spacer"></div>
+                            <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">{% if task.priority == "LOW" %}{% trans 'borad priority low' %}{% elif task.priority == "MIDDLE" %}{% trans 'borad priority middle' %}{% else %}{% trans 'board priority high' %}{% endif %}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="board completed-container">
+            <h3 class="board-title board-title-completed">{% trans 'board completed title' %}</h3>
+            <hr>
+            <ul id="completed-items" class="items">
+                {% for task in completedTasks %}
+                    <li class="board-item" value="{{ task.id }}" data-href="{% url 'todos:task_update' task.pk %}">
+                        <img class="handle" src="{% static 'images/grip-vertical.svg' %}" alt="handle">
+                        <div class="v-line"></div>
+                        <div class="board-item-content">
+                            <div class="board-item-title">
+                                {{ task.title|truncatechars:20 }}
+                            </div>
+                            <div class="board-item-description">
+                                {{ task.description | truncatechars:20 }}
+                            </div>
+                            <div class="spacer"></div>
+                            <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">{% if task.priority == "LOW" %}{% trans 'borad priority low' %}{% elif task.priority == "MIDDLE" %}{% trans 'borad priority middle' %}{% else %}{% trans 'board priority high' %}{% endif %}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</main>
+
+<script src="{% static 'js/Sortable.min.js' %}"></script>
+<script src="{% static 'js/task_board.js' %}"></script>
+
+{% endblock %}
