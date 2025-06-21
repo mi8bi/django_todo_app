@@ -5,3 +5,5 @@ django-import-export==4.3.7
 django-anymail==13.0
 itsdangerous==2.2.0
 python-dotenv==1.1.0
+whitenoise==6.9.0
+Brotli==1.1.0
