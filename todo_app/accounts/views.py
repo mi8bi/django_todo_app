@@ -38,7 +38,7 @@ def send_verification_email(user, request):
     mail_subject = 'Activate your account'
     serializer = get_verification_serializer()
     token = serializer.dumps(user.email)
-    activation_link = f"http://{current_site.domain}/accounts/activate/{token}/"
+    activation_link = f"{request.scheme}://{current_site.domain}/accounts/activate/{token}/"
 
     message = render_to_string('activation_email.html', {
         'user': user,
