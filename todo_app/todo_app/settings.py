@@ -25,12 +25,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("RENDER", "") != "true"
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "django-todo-app-9250.onrender.com",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://django-todo-app-9250.onrender.com",
 ]
 
 # Application definition

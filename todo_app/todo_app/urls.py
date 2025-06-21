@@ -18,8 +18,15 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls.i18n import i18n_patterns
 from django.urls import include, path
+from django.shortcuts import redirect
+
+
+def root_redirect(request):
+    return redirect("accounts:login")
+
 
 urlpatterns = i18n_patterns(
+    path("", root_redirect, name="root_redirect"),
     path("admin/", admin.site.urls),
     path("accounts/", include("accounts.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
