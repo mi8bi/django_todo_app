@@ -144,7 +144,6 @@ STATIC_URL = "static/"
 
 # アプリケーションごとの静的ファイルディレクトリ
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
     BASE_DIR / "accounts/static",
     BASE_DIR / "todos/static",
 ]

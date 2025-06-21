@@ -5,10 +5,13 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# mysqlclient ビルドに必要なパッケージを追加
+# システムの依存関係をインストール
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    gcc \
+    git \
+    gettext \
+    libmariadb-dev-compat \
+    libmariadb-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # requirements.txt を先にコピーして依存をインストール
