@@ -28,4 +28,4 @@ RUN python manage.py compilemessages
 EXPOSE 8000
 
 # 本番はgunicorn推奨
-CMD ["gunicorn", "todo_app.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py migrate && gunicorn todo_app.wsgi:application --bind 0.0.0.0:8000"]
