@@ -11,7 +11,7 @@
       "args": ["runserver"],
       "django": true,
       "autoStartBrowser": false,
-      "program": "${workspaceFolder}\\todo_app\\manage.py"
+      "program": "${workspaceFolder}/todo_app/manage.py"
     }
   ]
 }

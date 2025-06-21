@@ -27,5 +27,14 @@
             </ul>
         </div>
     {% endif %}
+
+    <p class="mt-4">
+        {% load i18n %}
+        {% trans "After submitting, a verification email will be sent to your email address. Please click the link in the email to activate your account." %}
+    </p>
+    <div class="mt-2">
+        <a href="{% url 'accounts:signup' %}">{% trans "Don't have an account? Sign up here" %}</a><br>
+        <a href="{% url 'accounts:resend_verification_email' %}">{% trans "Didn't receive your verification email? Resend verification email" %}</a>
+    </div>
 </body>
 </html>
