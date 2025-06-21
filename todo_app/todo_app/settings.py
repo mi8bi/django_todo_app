@@ -83,7 +83,7 @@ ANYMAIL = {
 }
 
 # Email Verification
-EMAIL_VERIFICATION_SALT = "email-verification-salt" # Consider moving to environment variable for production
+EMAIL_VERIFICATION_SALT = os.environ.get("EMAIL_VERIFICATION_SALT", "email-verification-salt") # Consider moving to environment variable for production
 EMAIL_VERIFICATION_TOKEN_MAX_AGE_SECONDS = 86400  # 24 hours
 
 # Database
