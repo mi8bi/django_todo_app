@@ -22,14 +22,7 @@
             <button type="submit">{% trans 'login submit' %}</button>
         </form>
         <div class="login-links">
-            <p>
-                {% trans "Don't have an account?" %}
-                <a href="{% url 'accounts:signup' %}">{% trans "Sign up here" %}</a>
-            </p>
-            <p>
-                {% trans "Didn't receive your verification email?" %}
-                <a href="{% url 'accounts:resend_verification_email' %}">{% trans "Resend verification email" %}</a>
-            </p>
+            <a class="login-links-signup" href="{% url 'accounts:signup' %}">{% trans "Sign up here" %}</a>
         </div>
     </div>
 </main>

@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render
 from .forms import SignUpForm
-from django.http import HttpResponse
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
@@ -17,11 +16,13 @@ from . import forms
 
 User = get_user_model()
 
+
 def get_verification_serializer():
     return URLSafeTimedSerializer(
         settings.SECRET_KEY,
         salt=settings.EMAIL_VERIFICATION_SALT
     )
+
 
 class AccountLoginView(LoginView):
     template_name = "login.html"

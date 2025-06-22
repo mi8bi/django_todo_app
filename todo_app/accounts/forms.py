@@ -22,7 +22,26 @@ class LoginForm(AuthenticationForm):
 
 
 class SignUpForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(
+        label="UserName",
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={"id": "signup-username", "placeholder": _("signup username placeholder")}
+        ),
+    )
+    email = forms.EmailField(
+        label="Email",
+        widget=forms.EmailInput(
+            attrs={"id": "signup-email", "placeholder": _("signup email placeholder")}
+        ),
+    )
+    password = forms.CharField(
+        label="Password",
+        max_length=20,
+        widget=forms.PasswordInput(
+            attrs={"id": "signup-password", "placeholder": _("signup password placeholder")}
+        ),
+    )
 
     class Meta:
         model = User
