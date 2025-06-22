@@ -1,18 +1,22 @@
 <!-- templates/accounts/signup.html -->
+{% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サインアップ</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
+<main class="auth-container">
     <h1>サインアップ</h1>
 
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">登録</button>
+        <button type="submit">{% trans "Submit" %}</button>
     </form>
 
     {% if form.errors %}
@@ -29,12 +33,12 @@
     {% endif %}
 
     <p class="mt-4">
-        {% load i18n %}
         {% trans "After submitting, a verification email will be sent to your email address. Please click the link in the email to activate your account." %}
     </p>
-    <div class="mt-2">
-        <a href="{% url 'accounts:signup' %}">{% trans "Don't have an account? Sign up here" %}</a><br>
+    <div class="auth-links mt-2">
+        <a href="{% url 'accounts:login' %}">{% trans "Back to Login" %}</a>
         <a href="{% url 'accounts:resend_verification_email' %}">{% trans "Didn't receive your verification email? Resend verification email" %}</a>
     </div>
+</main>
 </body>
 </html>

@@ -1,0 +1,144 @@
+/* General body and container styling for auth pages */
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 1em; /* Add some padding for smaller screens */
+    box-sizing: border-box;
+}
+
+/* Card-like container for forms */
+.auth-container {
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center; /* Center align text within the container */
+}
+
+/* General form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: left; /* Align form elements to the left */
+}
+
+form p { /* For Django's form.as_p rendering */
+    margin: 0 0 1em 0;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: #555;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+    padding: 0.8em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form input[type="email"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none; /* Remove default outline */
+}
+
+button[type="submit"] {
+    color: white;
+    padding: 0.8em;
+    transition: background-color 0.15s ease-in-out;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/* Error message styling */
+.errors, .error { /* .error for login, .errors for signup */
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 4px;
+    width: 100%; /* Ensure it takes full width of its container */
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.errors { /* Signup specific error container */
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.error { /* Login specific error message styling */
+    color: #d9534f; /* Bootstrap's danger color */
+    font-size: 0.9em; /* Slightly smaller text for login error */
+}
+
+.errors ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.errors li {
+    margin-bottom: 0.5em;
+}
+
+/* Links below the form */
+.auth-links {
+    margin-top: 1.5em;
+}
+
+.auth-links p {
+    margin: 0.5em 0;
+}
+
+.auth-links a {
+    color: #007bff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5em; /* Adjust as needed */
+}
+
+.auth-links a:last-child {
+    margin-bottom: 0; /* Remove margin from the last link */
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .auth-container {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        padding: 1.5em;
+    }
+
+    h1, h2 { /* General heading adjustments */
+        font-size: 1.5em;
+    }
+
+    button[type="submit"] {
+        font-size: 0.9em;
+    }
+}

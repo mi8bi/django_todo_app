@@ -1,0 +1,63 @@
+@import url("auth_shared.css");
+
+/* Signup specific styles */
+
+/* The signup page's form is directly in the body, and we applied auth-container styles to it via the form tag itself in the previous version.
+   We will need to wrap the form and related elements in a div with class="auth-container" in signup.html for consistency.
+   For now, styles are applied directly to form, .errors, .mt-4, .mt-2 as before, but ideally these would be inside an .auth-container.
+*/
+
+h1 { /* Signup page specific title */
+    color: #333;
+    margin-bottom: 1em;
+    /* text-align: center; is in auth_shared body or can be applied to h1 if it's outside auth-container */
+}
+
+/* Styles for form, .errors, .mt-4, .mt-2 in signup.css were designed to make them look like auth-container.
+   If signup.html is updated to include an .auth-container div, these specific width/background/padding/shadow styles on form itself can be simplified.
+   SIGNUP.HTML HAS BEEN UPDATED to include an .auth-container div.
+*/
+/* Form is now inside .auth-container, so remove redundant styling */
+form {
+    background-color: transparent; /* Inherit from .auth-container */
+    padding: 0; /* .auth-container provides padding */
+    border-radius: 0; /* .auth-container provides border-radius */
+    box-shadow: none; /* .auth-container provides box-shadow */
+    max-width: none; /* .auth-container controls max-width */
+    margin-left: 0; /* .auth-container handles centering */
+    margin-right: 0; /* .auth-container handles centering */
+}
+
+button[type="submit"] {
+    background-color: #007bff; /* Blue, same as login */
+    /* Inherits color, padding, border, border-radius, cursor, font-size, font-weight, transition from auth_shared.css */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue, same as login hover */
+}
+
+/* .errors styling is largely covered by auth_shared.css */
+/* .mt-4 and .mt-2 utility classes from signup.html */
+/* These should ideally be within the auth-container for consistent max-width and centering */
+/* Ensure error messages and links (.mt-4, .mt-2) within .auth-container don't try to set their own max-width if not needed */
+.auth-container .errors,
+.auth-container .mt-4,
+.auth-container .mt-2 {
+    max-width: 100%; /* Allow them to fill the width of auth-container */
+    /* margin-left/right auto might not be needed if text-align center on auth-container works */
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+.mt-2 {
+    margin-top: 1rem !important;
+}
+
+.mt-2 a {
+    /* color and text-decoration are in auth_shared.css .auth-links a */
+    display: block; /* Make links block elements for better spacing */
+    margin-bottom: 0.5em; /* Add some space between links */
+}
