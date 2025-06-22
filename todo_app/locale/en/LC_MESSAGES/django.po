@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-22 07:02+0900\n"
+"POT-Creation-Date: 2025-06-22 17:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,11 +26,23 @@ msgstr "Username"
 msgid "login password placeholder"
 msgstr "Password"
 
-#: todo_app/accounts/forms.py:34
-msgid "Email address"
-msgstr ""
+#: todo_app/accounts/forms.py:29
+msgid "signup username placeholder"
+msgstr "Username"
 
 #: todo_app/accounts/forms.py:35
+msgid "signup email placeholder"
+msgstr "Email"
+
+#: todo_app/accounts/forms.py:42
+msgid "signup password placeholder"
+msgstr "Password"
+
+#: todo_app/accounts/forms.py:53
+msgid "Email address"
+msgstr "Email"
+
+#: todo_app/accounts/forms.py:54
 msgid "Enter your email address"
 msgstr ""
 
@@ -46,21 +58,9 @@ msgstr "Login"
 msgid "login submit"
 msgstr "Login"
 
-#: todo_app/accounts/templates/login.html:26
-msgid "Don't have an account?"
-msgstr ""
-
-#: todo_app/accounts/templates/login.html:27
+#: todo_app/accounts/templates/login.html:25
 msgid "Sign up here"
-msgstr "Don't have an account? Register here"
-
-#: todo_app/accounts/templates/login.html:30
-msgid "Didn't receive your verification email?"
-msgstr ""
-
-#: todo_app/accounts/templates/login.html:31
-msgid "Resend verification email"
-msgstr "Didn't get your verification email? Click here to resend"
+msgstr "Register here"
 
 #: todo_app/accounts/templates/resend_verification_email.html:11
 #: todo_app/accounts/templates/resend_verification_email.html:16
@@ -84,33 +84,47 @@ msgstr ""
 msgid "Sign Up"
 msgstr ""
 
-#: todo_app/accounts/templates/signup.html:33
-msgid ""
-"After submitting, a verification email will be sent to your email address. "
-"Please click the link in the email to activate your account."
-msgstr ""
+#: todo_app/accounts/templates/signup.html:10
+msgid "signup title page"
+msgstr "Signup Page"
 
-#: todo_app/accounts/templates/signup.html:36
-msgid "Don't have an account? Sign up here"
-msgstr ""
+#: todo_app/accounts/templates/signup.html:16
+msgid "signup title"
+msgstr "Signup"
 
-#: todo_app/accounts/templates/signup.html:37
-msgid "Didn't receive your verification email? Resend verification email"
-msgstr ""
+#: todo_app/accounts/templates/signup.html:23
+msgid "signup submit"
+msgstr "Register"
 
-#: todo_app/accounts/views.py:33
+#: todo_app/accounts/templates/signup.html:27
+msgid "signup form errors"
+msgstr "input error"
+
+#: todo_app/accounts/templates/signup.html:38
+msgid "Login Page"
+msgstr "Login Page"
+
+#: todo_app/accounts/views.py:36
 msgid "login error msg"
 msgstr "Invalid username or password."
 
-#: todo_app/accounts/views.py:40
-msgid "アカウントが有効化されていません。メール認証を完了してください。"
-msgstr ""
+#: todo_app/accounts/views.py:43
+msgid "login not active"
+msgstr "Not activate. Please mail notification."
 
-#: todo_app/todo_app/settings.py:127
+#: todo_app/accounts/views.py:76
+msgid "This email address is already in use."
+msgstr "This email address is already in use."
+
+#: todo_app/accounts/views.py:140
+msgid "No account was found with this email address."
+msgstr "No account was found with this email address."
+
+#: todo_app/todo_app/settings.py:136
 msgid "English"
 msgstr ""
 
-#: todo_app/todo_app/settings.py:128
+#: todo_app/todo_app/settings.py:137
 msgid "Japanese"
 msgstr ""
 
@@ -358,3 +372,14 @@ msgstr "Update"
 #: todo_app/todos/templates/todos/task_update_form.html:61
 msgid "cancel btn"
 msgstr "Cancel"
+
+#, fuzzy
+#~| msgid "Don't have an account?"
+#~ msgid "Already have an account? Login"
+#~ msgstr "Don't have an account?"
+
+#~ msgid "Resend verification email"
+#~ msgstr "Click here to resend"
+
+#~ msgid "Didn't receive your verification email?"
+#~ msgstr "Didn't receive your verification email?"

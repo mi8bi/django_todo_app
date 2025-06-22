@@ -64,20 +64,21 @@ button:hover {
     color: red;
 }
 
-.login-links {
+.signup-links {
     display: flex;
+    flex-direction: row-reverse;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     margin-top: 12px;
 }
 
-.login-links-signup {
+.signup-links-login {
     margin-left: 10px;
     color: #009879;
     text-decoration: none;
 }
 
-.login-links-signup:hover {
+.signup-links-login:hover {
     color: #0f7b65;
 }

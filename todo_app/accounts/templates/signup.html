@@ -1,40 +1,45 @@
-<!-- templates/accounts/signup.html -->
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サインアップ</title>
-</head>
-<body>
-    <h1>サインアップ</h1>
+{% extends "base.html" %}
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">登録</button>
-    </form>
+{% load i18n %}
 
-    {% if form.errors %}
-        <div class="errors">
-            <p>入力にエラーがあります。</p>
-            <ul>
-                {% for field in form %}
-                    {% for error in field.errors %}
-                        <li>{{ error }}</li>
+{% load static %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% endblock %}
+{% block title %}{% trans 'signup title page' %}{% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <div class="card">
+        <h2>{% trans 'signup title' %}</h2>
+        <p class="error">{{ error_msg }}</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.username }}
+            {{ form.email }}
+            {{ form.password }}
+            <button type="submit">{% trans 'signup submit' %}</button>
+        </form>
+        {% if form.errors %}
+            <div class="error">
+                <p>{% trans 'signup form errors' %}</p>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
                     {% endfor %}
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-
-    <p class="mt-4">
-        {% load i18n %}
-        {% trans "After submitting, a verification email will be sent to your email address. Please click the link in the email to activate your account." %}
-    </p>
-    <div class="mt-2">
-        <a href="{% url 'accounts:signup' %}">{% trans "Don't have an account? Sign up here" %}</a><br>
-        <a href="{% url 'accounts:resend_verification_email' %}">{% trans "Didn't receive your verification email? Resend verification email" %}</a>
+                </ul>
+            </div>
+        {% endif %}
     </div>
-</body>
-</html>
+    <div class="signup-links">
+        <a class="signup-links-login" href="{% url 'accounts:login' %}">{% trans "Login Page" %}</a>
+    </div>
+</main>
+
+{% include "footer.html" %}
+
+{% endblock %}
