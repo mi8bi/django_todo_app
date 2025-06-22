@@ -72,8 +72,8 @@ class AccountSignUpView(FormView):
         username = form.cleaned_data["username"]
         email = form.cleaned_data["email"]
         # ユーザ名またはメールアドレスの重複チェック
-        if User.objects.filter(username=username).exists():
-            form.add_error("username", "このユーザー名は既に使用されています。")
+        if User.objects.filter(email=email).exists():
+            form.add_error("email", _("This email address is already in use."))
             return self.form_invalid(form)
         if User.objects.filter(email=email).exists():
             form.add_error("email", "このメールアドレスは既に使用されています。")
