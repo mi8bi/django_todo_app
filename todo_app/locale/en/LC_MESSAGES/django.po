@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-22 15:16+0900\n"
+"POT-Creation-Date: 2025-06-22 17:10+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,13 +100,23 @@ msgstr "Register"
 msgid "signup form errors"
 msgstr "input error"
 
-#: todo_app/accounts/views.py:34
+#: todo_app/accounts/views.py:36
 msgid "login error msg"
 msgstr "Invalid username or password."
 
-#: todo_app/accounts/views.py:41
-msgid "アカウントが有効化されていません。メール認証を完了してください。"
-msgstr ""
+#: todo_app/accounts/views.py:43
+#, fuzzy
+#| msgid "login title"
+msgid "login not active"
+msgstr "Not activate. Please mail notification."
+
+#: todo_app/accounts/views.py:76
+msgid "This email address is already in use."
+msgstr "This email address is already in use."
+
+#: todo_app/accounts/views.py:141
+msgid "No account was found with this email address."
+msgstr "No account was found with this email address."
 
 #: todo_app/todo_app/settings.py:136
 msgid "English"

@@ -40,7 +40,7 @@ class AccountLoginView(LoginView):
         user = form.get_user()
         if not user.is_active:
             context = self.get_context_data()
-            context["error_msg"] = _("アカウントが有効化されていません。メール認証を完了してください。")
+            context["error_msg"] = _("login not active")
             return self.render_to_response(context)
         return super().form_valid(form)
 
