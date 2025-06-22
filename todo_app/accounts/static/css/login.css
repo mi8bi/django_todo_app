@@ -1,83 +1,45 @@
-body {
-    font-family: "Poppins", sans-serif;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #f5f5f5;
-    color: #333;
-}
+@import url("auth_shared.css");
 
-.container {
+/* Login specific styles */
+
+/* In login.css, if main.container is just a wrapper, reset its padding */
+main.container {
+    padding: 0; /* Reset padding if .card handles it */
+    display: flex; /* Ensure it centers .card if .card has max-width */
+    justify-content: center; /* Center .card */
+    align-items: center; /* Center .card vertically if body is also flex */
     width: 100%;
-    max-width: 400px;
 }
 
-.card {
+/* The login page uses a structure <main class="container"><div class="card"> */
+/* We can adapt shared styles or override them if needed */
+/* For now, let's ensure the .card within .container gets the auth-container look */
+.container .card {
     background-color: #fff;
-    padding: 20px;
+    padding: 2em;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Consistent with auth-container */
+    text-align: center; /* Consistent with auth-container */
 }
 
-h2 {
-    text-align: center;
+h2 { /* Login page specific title */
     color: #333;
+    margin-bottom: 1em;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
+button[type="submit"] {
+    background-color: #007bff; /* Blue for login */
 }
 
-input {
-    padding: 10px;
-    margin-bottom: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: border-color 0.3s ease-in-out;
-    outline: none;
-    color: #333;
+button[type="submit"]:hover {
+    background-color: #0056b3;
 }
 
-input:focus {
-    border-color: #555;
-}
-
-button {
-    background-color: #009879;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-
-button:hover {
-    background-color: #0f7b65;
-}
-
-.error {
-    color: red;
-}
-
+/* Ensure .login-links inherits from .auth-links */
 .login-links {
-    margin-top: 2em;
-    font-size: 1rem;
-}
-.login-links p {
-    margin: 0.5em 0;
-}
-.login-links a {
-    color: #1976d2;
-    text-decoration: underline;
-    margin-left: 0.5em;
-    font-weight: bold;
-    transition: color 0.2s;
-}
-.login-links a:hover {
-    color: #0d47a1;
-    text-decoration: none;
+    /* auth_shared.css already styles .auth-links which should cover this if class is updated in html,
+       or we can duplicate relevant styles here if html cannot be changed.
+       For now, assuming login.html will be updated to use .auth-links */
 }

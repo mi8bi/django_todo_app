@@ -21,7 +21,7 @@
             {{ form.password }}
             <button type="submit">{% trans 'login submit' %}</button>
         </form>
-        <div class="login-links">
+        <div class="auth-links login-links">
             <p>
                 {% trans "Don't have an account?" %}
                 <a href="{% url 'accounts:signup' %}">{% trans "Sign up here" %}</a>
