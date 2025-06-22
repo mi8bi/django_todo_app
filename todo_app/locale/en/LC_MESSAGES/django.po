@@ -48,19 +48,19 @@ msgstr "Login"
 
 #: todo_app/accounts/templates/login.html:26
 msgid "Don't have an account?"
-msgstr ""
+msgstr "Don't have an account?"
 
 #: todo_app/accounts/templates/login.html:27
 msgid "Sign up here"
-msgstr "Don't have an account? Register here"
+msgstr "Register here"
 
 #: todo_app/accounts/templates/login.html:30
 msgid "Didn't receive your verification email?"
-msgstr ""
+msgstr "Didn't receive your verification email?"
 
 #: todo_app/accounts/templates/login.html:31
 msgid "Resend verification email"
-msgstr "Didn't get your verification email? Click here to resend"
+msgstr "Resend here"
 
 #: todo_app/accounts/templates/resend_verification_email.html:11
 #: todo_app/accounts/templates/resend_verification_email.html:16
