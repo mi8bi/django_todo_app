@@ -67,4 +67,18 @@ button:hover {
 .signup-links {
     display: flex;
     flex-direction: row-reverse;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.signup-links-login {
+    margin-left: 10px;
+    color: #009879;
+    text-decoration: none;
+}
+
+.signup-links-login:hover {
+    color: #0f7b65;
 }

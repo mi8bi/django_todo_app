@@ -137,6 +137,5 @@ class ResendVerificationEmailView(FormView):
                 messages.info(self.request, 'このアカウントは既に有効化されています。ログインしてください。')
             return redirect('accounts:login')
         except User.DoesNotExist:
-        except User.DoesNotExist:
             form.add_error('email', _('No account was found with this email address.'))
             return self.form_invalid(form)
