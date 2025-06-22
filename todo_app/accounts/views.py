@@ -1,5 +1,5 @@
 from django.contrib.auth.views import LoginView
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render
 from .forms import SignUpForm
@@ -11,6 +11,8 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.conf import settings
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadTimeSignature
+from django.views import View
+from django.views.generic.edit import FormView
 
 from . import forms
 
@@ -61,71 +63,79 @@ def send_verification_email(user, request):
     email.send()
 
 
-def signup_view(request):
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data["password"])
-            user.is_active = False  # Deactivate account until email confirmation
-            user.save()
-            send_verification_email(user, request)
-            # It's better to redirect to a page that informs the user to check their email
-            # For now, using HttpResponse as per existing code.
-            messages.info(request, "確認メールを送信しました。メールを確認してアカウントを有効化してください。")
-            return redirect('accounts:login') # Or a dedicated "check your email" page
-    else:
-        form = SignUpForm()
-    return render(request, "signup.html", {"form": form})
+class AccountSignUpView(FormView):
+    template_name = "signup.html"
+    form_class = SignUpForm
+    success_url = reverse_lazy("accounts:login")
+
+    def form_valid(self, form):
+        username = form.cleaned_data["username"]
+        email = form.cleaned_data["email"]
+        # ユーザ名またはメールアドレスの重複チェック
+        if User.objects.filter(username=username).exists():
+            form.add_error("username", "このユーザー名は既に使用されています。")
+            return self.form_invalid(form)
+        if User.objects.filter(email=email).exists():
+            form.add_error("email", "このメールアドレスは既に使用されています。")
+            return self.form_invalid(form)
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data["password"])
+        user.is_active = False  # メール認証が完了するまで無効化
+        user.save()
+        send_verification_email(user, self.request)
+        messages.info(self.request, "確認メールを送信しました。メールを確認してアカウントを有効化してください。")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form))
 
 
-def activate_account(request, token):
-    serializer = get_verification_serializer()
-    try:
-        email = serializer.loads(
-            token,
-            max_age=settings.EMAIL_VERIFICATION_TOKEN_MAX_AGE_SECONDS
-        )
-        user = User.objects.get(email=email)
-        if user.is_active:
-            messages.info(request, "アカウントは既に有効化されています。")
-            return render(request, "activation_complete.html", {"already_active": True})
-        else:
-            user.is_active = True
-            user.save()
-            messages.success(request, "アカウントが有効化されました！ログインしてください。")
-            return render(request, "activation_complete.html", {"already_active": False})
-    except SignatureExpired:
-        messages.error(request, "確認リンクの有効期限が切れています。新しい確認メールをリクエストしてください。")
-        return redirect('accounts:resend_verification_email')
-    except BadTimeSignature:
-        messages.error(request, "確認リンクが無効です。")
-        return redirect('accounts:signup')
-    except User.DoesNotExist:
-        messages.error(request, "アカウントが見つかりません。再度登録をお試しください。")
-        return redirect('accounts:signup')
-    except Exception:
-        messages.error(request, "アカウントの有効化中にエラーが発生しました。")
-        return redirect('accounts:signup')
+class ActivateAccountView(View):
+    def get(self, request, token):
+        serializer = get_verification_serializer()
+        try:
+            email = serializer.loads(
+                token,
+                max_age=settings.EMAIL_VERIFICATION_TOKEN_MAX_AGE_SECONDS
+            )
+            user = User.objects.get(email=email)
+            if user.is_active:
+                messages.info(request, "アカウントは既に有効化されています。")
+                return render(request, "activation_complete.html", {"already_active": True})
+            else:
+                user.is_active = True
+                user.save()
+                messages.success(request, "アカウントが有効化されました！ログインしてください。")
+                return render(request, "activation_complete.html", {"already_active": False})
+        except SignatureExpired:
+            messages.error(request, "確認リンクの有効期限が切れています。新しい確認メールをリクエストしてください。")
+            return redirect('accounts:resend_verification_email')
+        except BadTimeSignature:
+            messages.error(request, "確認リンクが無効です。")
+            return redirect('accounts:signup')
+        except User.DoesNotExist:
+            messages.error(request, "アカウントが見つかりません。再度登録をお試しください。")
+            return redirect('accounts:signup')
+        except Exception:
+            messages.error(request, "アカウントの有効化中にエラーが発生しました。")
+            return redirect('accounts:signup')
 
 
-def resend_verification_email_view(request):
-    if request.method == 'POST':
-        form = forms.ResendVerificationEmailForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            try:
-                user = User.objects.get(email=email)
-                if not user.is_active:
-                    send_verification_email(user, request)
-                    messages.success(request, '確認メールを再送信しました。メールを確認してください。')
-                else:
-                    messages.info(request, 'このアカウントは既に有効化されています。ログインしてください。')
-                return redirect('accounts:login')
-            except User.DoesNotExist:
-                messages.error(request, 'このメールアドレスに紐づくアカウントは見つかりませんでした。')
-        # If form is invalid, it will be re-rendered with errors below
-    else:
-        form = forms.ResendVerificationEmailForm()
+class ResendVerificationEmailView(FormView):
+    template_name = 'resend_verification_email.html'
+    form_class = forms.ResendVerificationEmailForm
+    success_url = reverse_lazy("accounts:login")
 
-    return render(request, 'resend_verification_email.html', {'form': form})
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        try:
+            user = User.objects.get(email=email)
+            if not user.is_active:
+                send_verification_email(user, self.request)
+                messages.success(self.request, '確認メールを再送信しました。メールを確認してください。')
+            else:
+                messages.info(self.request, 'このアカウントは既に有効化されています。ログインしてください。')
+            return redirect('accounts:login')
+        except User.DoesNotExist:
+            messages.error(self.request, 'このメールアドレスに紐づくアカウントは見つかりませんでした。')
+            return self.form_invalid(form)
