@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.timezone import now
 from datetime import date, timedelta
-from .models import Task
+from .models import Task, Category
 
 
 class TaskForm(forms.ModelForm):
@@ -64,3 +64,12 @@ class TaskBulkDeleteForm(forms.Form):
     tasks = forms.ModelMultipleChoiceField(
         queryset=Task.objects.all(), widget=forms.CheckboxSelectMultiple
     )
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ["title"]
+        widgets = {
+            "title": forms.TextInput(attrs={"placeholder": "カテゴリ名"})
+        }

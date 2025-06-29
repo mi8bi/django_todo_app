@@ -15,4 +15,6 @@ urlpatterns = [
     path("board/update", views.BoardView.as_view(), name="board_update"),
     path("gantt/", views.GanttView.as_view(), name="gantt"),
     path("gantt/get", views.GanttDataView.as_view(), name="gantt_get"),
+    path("category/", views.CategoryListView.as_view(), name="category_list"),
+    path("category/add/", views.CategoryCreateView.as_view(), name="category_add"),
 ]

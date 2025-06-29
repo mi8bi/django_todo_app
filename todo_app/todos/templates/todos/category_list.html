@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'category list title' %}{% endblock %}
+
+{% block content %}
+<main>
+  <div class="form-container">
+    <h2 class="form-title">{% trans 'category list title' %}</h2>
+    <a href="{% url 'todos:category_add' %}" class="btn">{% trans 'category add' %}</a>
+    <ul class="category-list">
+      {% for category in categories %}
+        <li>{{ category.title }}</li>
+      {% empty %}
+        <li>{% trans 'no categories' %}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</main>
+{% endblock %}

@@ -14,6 +14,8 @@ from django.views.generic.edit import (
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from . import forms, models
+from .models import Category
+from .forms import CategoryForm
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -160,7 +162,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         next_page = self.request.GET.get("next_page", "1")
-        return f"{reverse("todos:task_list")}?page={next_page}"
+        return f"{reverse('todos:task_list')}?page={next_page}"
 
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
@@ -193,3 +195,23 @@ class TaskCategoryJsonView(LoginRequiredMixin, View):
             for task in tasks
         ]
         return JsonResponse(task_categories, safe=False)
+
+
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+    template_name = "todos/category_list.html"
+    context_object_name = "categories"
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user).order_by("-created_at")
+
+
+class CategoryCreateView(LoginRequiredMixin, CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = "todos/category_form.html"
+    success_url = reverse_lazy("todos:category_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
