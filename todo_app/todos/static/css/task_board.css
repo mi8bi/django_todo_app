@@ -115,6 +115,15 @@ hr {
 .handle {
     cursor: move;
     cursor: -webkit-grabbing;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.handle img {
+    width: 24px;      /* 画像サイズはそのまま */
+    height: 24px;
 }
 
 .low {

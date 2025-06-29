@@ -40,8 +40,20 @@ form {
     margin: 16px 24px 16px 24px;
 }
 
+.field-error {
+  color: #e53935;
+  font-size: 0.95em;
+  margin-top: 4px;
+}
+
 .form-errors {
-    color: red;
+  color: #e53935;
+  background: #fff0f0;
+  border: 1px solid #e53935;
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  list-style: disc inside;
 }
 
 .form-control {

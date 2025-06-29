@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% load static %}
-
 {% load i18n %}
 
 {% block title %}{% trans 'task add title page' %}{% endblock %}
@@ -14,50 +13,74 @@
 <main>
   <div class="form-container">
     <h2 class="form-title">{% trans 'task add title' %}</h2>
-    {% if form.errors %}
-    <ul class="form-errors">
+    {% if form.non_field_errors %}
+      <ul class="form-errors">
         {% for error in form.non_field_errors %}
-        <li>{{ error }}</li>
+          <li>{{ error }}</li>
         {% endfor %}
-    </ul>
+      </ul>
     {% endif %}
     <form method="post">
       {% csrf_token %}
       <div class="form-control">
         {{ form.title.label_tag }}
         {{ form.title }}
+        {% for error in form.title.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
       </div>
       <div class="form-control">
         {{ form.category.label_tag }}
         {{ form.category }}
+        {% for error in form.category.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
       </div>
       <div class="form-control">
         {{ form.status.label_tag }}
         {{ form.status }}
+        {% for error in form.status.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
       </div>
       <div class="form-control">
         {{ form.priority.label_tag }}
         {{ form.priority }}
+        {% for error in form.priority.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
       </div>
       <div class="form-control">
         {{ form.progress.label_tag }}
         {{ form.progress }}
+        {% for error in form.progress.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
       </div>
       <div class="form-control">
         {{ form.start_date.label_tag }}
         {{ form.start_date }}
+        {% for error in form.start_date.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
       </div>
       <div class="form-control">
         {{ form.due_date.label_tag }}
         {{ form.due_date }}
+        {% for error in form.due_date.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
       </div>
       <div class="form-control">
         {{ form.description.label_tag }}
         {{ form.description }}
+        {% for error in form.description.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
       </div>
       <div class="form-action">
         <button type="submit">{% trans 'add submit btn' %}</button>
-        <a href="{{request.META.HTTP_REFERER}}">{% trans 'add cancel btn' %}</a>
+        <a href="{{ request.GET.next|default:default_cancel_url }}">{% trans 'add cancel btn' %}</a>
       </div>
     </form>
   </div>

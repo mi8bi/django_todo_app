@@ -27,6 +27,10 @@ class TaskForm(forms.ModelForm):
             ),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["category"].required = True
+
     def clean_start_date(self):
         start_date = self.cleaned_data.get("start_date")
         if start_date < now() - timedelta(days=1):
@@ -39,12 +43,19 @@ class TaskForm(forms.ModelForm):
             raise ValidationError("Due date cannot be in the past.")
         return due_date
 
+    def clean_progress(self):
+        progress = self.cleaned_data.get("progress")
+        if progress is not None and progress < 0:
+            raise ValidationError("進捗率は0以上で入力してください。")
+        return progress
+
     def clean(self):
-        start_date = self.cleaned_data.get("start_date")
-        due_date = self.cleaned_data.get("due_date")
-        if not start_date < due_date:
+        cleaned_data = super().clean()
+        start_date = cleaned_data.get("start_date")
+        due_date = cleaned_data.get("due_date")
+        if start_date and due_date and not start_date < due_date:
             raise ValidationError("The scheduled start date is past the deadline.")
-        return self.cleaned_data
+        return cleaned_data
 
 
 class TaskSearchForm(forms.ModelForm):

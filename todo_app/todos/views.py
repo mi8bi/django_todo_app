@@ -164,18 +164,28 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
         next_page = self.request.GET.get("next_page", "1")
         return f"{reverse('todos:task_list')}?page={next_page}"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["default_cancel_url"] = reverse_lazy("todos:task_list")
+        return context
+
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = models.Task
     form_class = forms.TaskForm
     template_name_suffix = "_update_form"
 
-    # TODO: formがinvalidateしたときに画面遷移が意図通りにいかない
     def get_success_url(self):
         referer_url = self.request.POST.get("referer-url", "")
         if referer_url:
             return referer_url
         return reverse("todos:task_list")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        next_url = self.request.GET.get("next")
+        context["default_cancel_url"] = next_url or reverse_lazy("todos:task_list")
+        return context
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
@@ -215,3 +225,16 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+class CategoryEditView(LoginRequiredMixin, UpdateView):
+    model = Category
+    fields = ["title"]  # 必要に応じてフィールド名を変更
+    template_name = "todos/category_form.html"
+    success_url = reverse_lazy("todos:category_list")
+
+
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
+    model = Category
+    template_name = "todos/category_confirm_delete.html"
+    success_url = reverse_lazy("todos:category_list")

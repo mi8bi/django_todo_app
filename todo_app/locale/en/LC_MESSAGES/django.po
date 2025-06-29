@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-22 17:23+0900\n"
+"POT-Creation-Date: 2025-06-29 15:29+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr "Login"
 msgid "login submit"
 msgstr "Login"
 
-#: todo_app/accounts/templates/login.html:25
+#: todo_app/accounts/templates/login.html:26
 msgid "Sign up here"
 msgstr "Register here"
 
@@ -100,7 +100,7 @@ msgstr "Register"
 msgid "signup form errors"
 msgstr "input error"
 
-#: todo_app/accounts/templates/signup.html:38
+#: todo_app/accounts/templates/signup.html:39
 msgid "Login Page"
 msgstr "Login Page"
 
@@ -132,65 +132,65 @@ msgstr ""
 msgid "model category title"
 msgstr "Title"
 
-#: todo_app/todos/models.py:17
+#: todo_app/todos/models.py:18
 #: todo_app/todos/templates/todos/task_list.html:135
 msgid "priority low"
 msgstr "Low"
 
-#: todo_app/todos/models.py:18
+#: todo_app/todos/models.py:19
 #: todo_app/todos/templates/todos/task_list.html:135
 msgid "priority middle"
 msgstr "Middle"
 
-#: todo_app/todos/models.py:19
+#: todo_app/todos/models.py:20
 #: todo_app/todos/templates/todos/task_list.html:135
 msgid "priority high"
 msgstr "High"
 
-#: todo_app/todos/models.py:23
+#: todo_app/todos/models.py:24
 #: todo_app/todos/templates/todos/task_list.html:132
 msgid "status not completed"
 msgstr "Not Completed"
 
-#: todo_app/todos/models.py:24
+#: todo_app/todos/models.py:25
 #: todo_app/todos/templates/todos/task_list.html:132
 msgid "status progress"
 msgstr "Status"
 
-#: todo_app/todos/models.py:25
+#: todo_app/todos/models.py:26
 #: todo_app/todos/templates/todos/task_list.html:132
 msgid "status completed"
 msgstr "Completed"
 
-#: todo_app/todos/models.py:29
+#: todo_app/todos/models.py:30
 msgid "model task title"
 msgstr "Title"
 
-#: todo_app/todos/models.py:32
+#: todo_app/todos/models.py:33
 msgid "model task progress"
 msgstr "Progress"
 
-#: todo_app/todos/models.py:39
+#: todo_app/todos/models.py:40
 msgid "model task status"
 msgstr "Status"
 
-#: todo_app/todos/models.py:45
+#: todo_app/todos/models.py:46
 msgid "model task priority"
 msgstr "Priority"
 
-#: todo_app/todos/models.py:52
+#: todo_app/todos/models.py:53
 msgid "model task category"
 msgstr "Category"
 
-#: todo_app/todos/models.py:54
+#: todo_app/todos/models.py:55
 msgid "model task description"
 msgstr "Description"
 
-#: todo_app/todos/models.py:58
+#: todo_app/todos/models.py:59
 msgid "model task start_date"
 msgstr "Start Date"
 
-#: todo_app/todos/models.py:61
+#: todo_app/todos/models.py:62
 msgid "model task due_date"
 msgstr "Due Date"
 
@@ -210,9 +210,36 @@ msgstr "Board"
 msgid "menu gantt"
 msgstr "Gantt"
 
-#: todo_app/todos/templates/header.html:36
+#: todo_app/todos/templates/header.html:11
+msgid "menu category"
+msgstr "Category"
+
+#: todo_app/todos/templates/header.html:37
 msgid "logout"
 msgstr "Logout"
+
+#: todo_app/todos/templates/todos/category_form.html:4
+#: todo_app/todos/templates/todos/category_form.html:9
+msgid "category add title"
+msgstr "Title"
+
+#: todo_app/todos/templates/todos/category_form.html:23
+#: todo_app/todos/templates/todos/category_list.html:10
+msgid "category add"
+msgstr "Category Add"
+
+#: todo_app/todos/templates/todos/category_form.html:24
+msgid "cancel"
+msgstr "Cancel"
+
+#: todo_app/todos/templates/todos/category_list.html:4
+#: todo_app/todos/templates/todos/category_list.html:9
+msgid "category list title"
+msgstr "Category List"
+
+#: todo_app/todos/templates/todos/category_list.html:15
+msgid "no categories"
+msgstr "Title"
 
 #: todo_app/todos/templates/todos/home.html:7
 msgid "home title page"

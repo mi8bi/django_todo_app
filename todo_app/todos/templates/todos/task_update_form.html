@@ -55,10 +55,10 @@
         {{ form.description.label_tag }}
         {{ form.description }}
       </div>
-      <input type="hidden" name="referer-url" value="{{request.META.HTTP_REFERER}}">
+      <input type="hidden" name="referer-url" value="{{ request.GET.next|default:default_cancel_url }}">
       <div class="form-action">
         <button type="submit">{% trans 'update btn' %}</button>
-        <a href="{{request.META.HTTP_REFERER}}">{% trans 'cancel btn' %}</a>
+        <a href="{{ request.GET.next|default:default_cancel_url }}">{% trans 'cancel btn' %}</a>
       </div>
     </form>
   </div>
