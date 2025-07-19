@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 15:29+0900\n"
+"POT-Creation-Date: 2025-07-19 21:48+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -199,20 +199,20 @@ msgid "menu home"
 msgstr "Home"
 
 #: todo_app/todos/templates/header.html:8
+msgid "menu category"
+msgstr "Category"
+
+#: todo_app/todos/templates/header.html:9
 msgid "menu task"
 msgstr "Tasks"
 
-#: todo_app/todos/templates/header.html:9
+#: todo_app/todos/templates/header.html:10
 msgid "menu board"
 msgstr "Board"
 
-#: todo_app/todos/templates/header.html:10
+#: todo_app/todos/templates/header.html:11
 msgid "menu gantt"
 msgstr "Gantt"
-
-#: todo_app/todos/templates/header.html:11
-msgid "menu category"
-msgstr "Category"
 
 #: todo_app/todos/templates/header.html:37
 msgid "logout"
@@ -224,7 +224,7 @@ msgid "category add title"
 msgstr "Title"
 
 #: todo_app/todos/templates/todos/category_form.html:23
-#: todo_app/todos/templates/todos/category_list.html:10
+#: todo_app/todos/templates/todos/category_list.html:18
 msgid "category add"
 msgstr "Category Add"
 
@@ -232,12 +232,20 @@ msgstr "Category Add"
 msgid "cancel"
 msgstr "Cancel"
 
-#: todo_app/todos/templates/todos/category_list.html:4
-#: todo_app/todos/templates/todos/category_list.html:9
+#: todo_app/todos/templates/todos/category_list.html:5
+#: todo_app/todos/templates/todos/category_list.html:17
 msgid "category list title"
 msgstr "Category List"
 
-#: todo_app/todos/templates/todos/category_list.html:15
+#: todo_app/todos/templates/todos/category_list.html:25
+msgid "edit"
+msgstr "Edit"
+
+#: todo_app/todos/templates/todos/category_list.html:26
+msgid "delete"
+msgstr "Delete"
+
+#: todo_app/todos/templates/todos/category_list.html:30
 msgid "no categories"
 msgstr "Title"
 
@@ -249,19 +257,19 @@ msgstr "Home"
 msgid "home graph title"
 msgstr "Task Graph"
 
-#: todo_app/todos/templates/todos/task_add_form.html:7
+#: todo_app/todos/templates/todos/task_add_form.html:6
 msgid "task add title page"
 msgstr "Add"
 
-#: todo_app/todos/templates/todos/task_add_form.html:16
+#: todo_app/todos/templates/todos/task_add_form.html:15
 msgid "task add title"
 msgstr "Add Task"
 
-#: todo_app/todos/templates/todos/task_add_form.html:59
+#: todo_app/todos/templates/todos/task_add_form.html:82
 msgid "add submit btn"
 msgstr "Add"
 
-#: todo_app/todos/templates/todos/task_add_form.html:60
+#: todo_app/todos/templates/todos/task_add_form.html:83
 msgid "add cancel btn"
 msgstr "Cancel"
 
@@ -273,29 +281,29 @@ msgstr "Board"
 msgid "board not-completed title"
 msgstr "Not Completed"
 
-#: todo_app/todos/templates/todos/task_board.html:35
-#: todo_app/todos/templates/todos/task_board.html:57
-#: todo_app/todos/templates/todos/task_board.html:79
+#: todo_app/todos/templates/todos/task_board.html:37
+#: todo_app/todos/templates/todos/task_board.html:73
+#: todo_app/todos/templates/todos/task_board.html:109
 msgid "borad priority low"
 msgstr "Priority:Low"
 
-#: todo_app/todos/templates/todos/task_board.html:35
-#: todo_app/todos/templates/todos/task_board.html:57
-#: todo_app/todos/templates/todos/task_board.html:79
+#: todo_app/todos/templates/todos/task_board.html:37
+#: todo_app/todos/templates/todos/task_board.html:73
+#: todo_app/todos/templates/todos/task_board.html:109
 msgid "borad priority middle"
 msgstr "Priority:Middle"
 
-#: todo_app/todos/templates/todos/task_board.html:35
-#: todo_app/todos/templates/todos/task_board.html:57
-#: todo_app/todos/templates/todos/task_board.html:79
+#: todo_app/todos/templates/todos/task_board.html:37
+#: todo_app/todos/templates/todos/task_board.html:73
+#: todo_app/todos/templates/todos/task_board.html:109
 msgid "board priority high"
 msgstr "Priority:High"
 
-#: todo_app/todos/templates/todos/task_board.html:42
+#: todo_app/todos/templates/todos/task_board.html:56
 msgid "board progress title"
 msgstr "Progress"
 
-#: todo_app/todos/templates/todos/task_board.html:64
+#: todo_app/todos/templates/todos/task_board.html:92
 msgid "board completed title"
 msgstr "Completed"
 

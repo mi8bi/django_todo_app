@@ -219,7 +219,7 @@ class CategoryListView(LoginRequiredMixin, ListView):
 class CategoryCreateView(LoginRequiredMixin, CreateView):
     model = Category
     form_class = CategoryForm
-    template_name = "todos/category_form.html"
+    template_name = "todos/category_add_form.html"
     success_url = reverse_lazy("todos:category_list")
 
     def form_valid(self, form):
@@ -229,8 +229,8 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
 
 class CategoryEditView(LoginRequiredMixin, UpdateView):
     model = Category
-    fields = ["title"]  # 必要に応じてフィールド名を変更
-    template_name = "todos/category_form.html"
+    fields = ["title"]
+    template_name = "todos/category_edit_form.html"
     success_url = reverse_lazy("todos:category_list")
 
 

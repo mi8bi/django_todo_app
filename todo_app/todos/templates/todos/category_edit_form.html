@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'edit' %}{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+<link rel="stylesheet" href="{% static 'css/category_form.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "header.html" %}
+<main>
+  <div class="list-container">
+    <div class="list-header">
+      <h2 class="list-title">{% trans 'edit' %}</h2>
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-control">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+        {% if form.title.errors %}
+          <ul class="form-errors">
+            {% for error in form.title.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <div class="item-actions" style="justify-content: center; margin-top: 24px;">
+        <button type="submit" class="btn btn-primary">{% trans 'edit' %}</button>
+        <a href="{% url 'todos:category_list' %}" class="btn btn-danger">{% trans 'cancel' %}</a>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}
