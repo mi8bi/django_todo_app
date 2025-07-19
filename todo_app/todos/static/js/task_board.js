@@ -54,56 +54,62 @@ const updateTaskRequest = async (status, taskId) => {
   await fetch(request);
 };
 
-new Sortable(notCompletedItems, {
-  group: "shared",
-  animation: 150,
-  handle: ".handle",
-  ghostClass: "blue-background-class",
-  sort: false,
-  onEnd: (e) => {
-    const fromElemId = e.from.id;
-    const toElemId = e.to.id;
-    const taskId = e.item.value;
-    const fromStatus = getTaskStatusByElemId(fromElemId);
-    const toStatus = getTaskStatusByElemId(toElemId);
-    if (fromStatus == toStatus) return;
+if (notCompletedItems) {
+  new Sortable(notCompletedItems, {
+    group: "shared",
+    animation: 150,
+    handle: ".handle",
+    ghostClass: "blue-background-class",
+    sort: false,
+    onEnd: (e) => {
+      const fromElemId = e.from.id;
+      const toElemId = e.to.id;
+      const taskId = e.item.value;
+      const fromStatus = getTaskStatusByElemId(fromElemId);
+      const toStatus = getTaskStatusByElemId(toElemId);
+      if (fromStatus == toStatus) return;
 
-    updateTaskRequest(toStatus, taskId);
-  },
-});
+      updateTaskRequest(toStatus, taskId);
+    },
+  });
+}
 
-new Sortable(progressItems, {
-  group: "shared",
-  animation: 150,
-  handle: ".handle",
-  ghostClass: "blue-background-class",
-  sort: false,
-  onEnd: (e) => {
-    const fromElemId = e.from.id;
-    const toElemId = e.to.id;
-    const taskId = e.item.value;
-    const fromStatus = getTaskStatusByElemId(fromElemId);
-    const toStatus = getTaskStatusByElemId(toElemId);
-    if (fromStatus == toStatus) return;
+if (progressItems) {
+  new Sortable(progressItems, {
+    group: "shared",
+    animation: 150,
+    handle: ".handle",
+    ghostClass: "blue-background-class",
+    sort: false,
+    onEnd: (e) => {
+      const fromElemId = e.from.id;
+      const toElemId = e.to.id;
+      const taskId = e.item.value;
+      const fromStatus = getTaskStatusByElemId(fromElemId);
+      const toStatus = getTaskStatusByElemId(toElemId);
+      if (fromStatus == toStatus) return;
 
-    updateTaskRequest(toStatus, taskId);
-  },
-});
+      updateTaskRequest(toStatus, taskId);
+    },
+  });
+}
 
-new Sortable(completedItems, {
-  group: "shared",
-  animation: 150,
-  handle: ".handle",
-  ghostClass: "blue-background-class",
-  sort: false,
-  onEnd: (e) => {
-    const fromElemId = e.from.id;
-    const toElemId = e.to.id;
-    const taskId = e.item.value;
-    const fromStatus = getTaskStatusByElemId(fromElemId);
-    const toStatus = getTaskStatusByElemId(toElemId);
-    if (fromStatus == toStatus) return;
+if (completedItems) {
+  new Sortable(completedItems, {
+    group: "shared",
+    animation: 150,
+    handle: ".handle",
+    ghostClass: "blue-background-class",
+    sort: false,
+    onEnd: (e) => {
+      const fromElemId = e.from.id;
+      const toElemId = e.to.id;
+      const taskId = e.item.value;
+      const fromStatus = getTaskStatusByElemId(fromElemId);
+      const toStatus = getTaskStatusByElemId(toElemId);
+      if (fromStatus == toStatus) return;
 
-    updateTaskRequest(toStatus, taskId);
-  },
-});
+      updateTaskRequest(toStatus, taskId);
+    },
+  });
+}
