@@ -172,7 +172,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = models.Task
-    form_class = forms.TaskForm
+    form_class = forms.TaskUpdateForm
     template_name_suffix = "_update_form"
 
     def get_success_url(self):

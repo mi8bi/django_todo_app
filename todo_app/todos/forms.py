@@ -19,6 +19,7 @@ class TaskForm(forms.ModelForm):
             "priority",
         ]
         widgets = {
+            "progress": forms.Select(choices=[(i, f"{i} %") for i in range(0, 101, 10)]),
             "start_date": forms.DateInput(
                 attrs={"type": "date", "min": date.today().isoformat()}
             ),
@@ -84,3 +85,20 @@ class CategoryForm(forms.ModelForm):
         widgets = {
             "title": forms.TextInput(attrs={"placeholder": "カテゴリ名"})
         }
+
+
+class TaskUpdateForm(TaskForm):
+    class Meta(TaskForm.Meta):
+        widgets = TaskForm.Meta.widgets.copy()
+        widgets["start_date"] = forms.DateInput(attrs={"type": "date"})
+        widgets["due_date"] = forms.DateInput(attrs={"type": "date"})
+
+    def clean_start_date(self):
+        start_date = self.cleaned_data.get("start_date")
+        # 更新時は過去日も許容
+        return start_date
+
+    def clean_due_date(self):
+        due_date = self.cleaned_data.get("due_date")
+        # 更新時は過去日も許容
+        return due_date
