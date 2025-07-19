@@ -133,7 +133,19 @@
                         <td
                             data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">
                             <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">{% if task.priority == "LOW" %}{% trans 'priority low' %}{% elif task.priority == "MIDDLE" %}{% trans 'priority middle' %}{% else %}{% trans 'priority high' %}{% endif %}</span></td>
-                        <td data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">{{ task.progress }} %</td>
+                        <td data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">
+                          <span class="
+                            {% if task.progress <= 30 %}
+                              progress-low
+                            {% elif task.progress <= 70 %}
+                              progress-middle
+                            {% else %}
+                              progress-high
+                            {% endif %}
+                          ">
+                            {{ task.progress }} %
+                          </span>
+                        </td>
                         <td class="left" data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">{{ task.title | truncatechars:20 }}</td>
                         <td data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">{{ task.category }}</td>
                         <td class="left" data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">{{ task.description | truncatechars:20 }}</td>

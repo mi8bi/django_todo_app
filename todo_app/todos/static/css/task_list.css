@@ -241,6 +241,25 @@ input[type="checkbox"] {
     border-radius: 8px;
 }
 
+.progress-low {
+    background-color: #f43346;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+.progress-middle {
+    background-color: #ffe066;
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+.progress-high {
+    background-color: #37bb94;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
 .pagination-container {
     display: flex;
     justify-content: center;

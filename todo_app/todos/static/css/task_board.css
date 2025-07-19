@@ -149,3 +149,32 @@ hr {
     border-radius: 8px;
     font-size: x-small;
 }
+
+.progress-low {
+  background-color: #f43346;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: x-small;
+}
+.progress-middle {
+  background-color: #ffe066;
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: x-small;
+}
+.progress-high {
+  background-color: #37bb94;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: x-small;
+}
+
+.board-item-status-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+}

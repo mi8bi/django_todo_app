@@ -34,7 +34,24 @@
                                 {{ task.description | truncatechars:20 }}
                             </div>
                             <div class="spacer"></div>
-                            <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">{% if task.priority == "LOW" %}{% trans 'borad priority low' %}{% elif task.priority == "MIDDLE" %}{% trans 'borad priority middle' %}{% else %}{% trans 'board priority high' %}{% endif %}</span>
+                            <div class="board-item-status-row">
+                              <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">
+                                {% if task.priority == "LOW" %}{% trans 'borad priority low' %}
+                                {% elif task.priority == "MIDDLE" %}{% trans 'borad priority middle' %}
+                                {% else %}{% trans 'board priority high' %}{% endif %}
+                              </span>
+                              <span class="
+                                {% if task.progress <= 30 %}
+                                  progress-low
+                                {% elif task.progress <= 70 %}
+                                  progress-middle
+                                {% else %}
+                                  progress-high
+                                {% endif %}
+                              ">
+                                {{ task.progress }} %
+                              </span>
+                            </div>
                         </div>
                     </li>
                 {% empty %}
@@ -70,7 +87,24 @@
                                 {{ task.description|truncatechars:20 }}
                             </div>
                             <div class="spacer"></div>
-                            <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">{% if task.priority == "LOW" %}{% trans 'borad priority low' %}{% elif task.priority == "MIDDLE" %}{% trans 'borad priority middle' %}{% else %}{% trans 'board priority high' %}{% endif %}</span>
+                            <div class="board-item-status-row">
+                              <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">
+                                {% if task.priority == "LOW" %}{% trans 'borad priority low' %}
+                                {% elif task.priority == "MIDDLE" %}{% trans 'borad priority middle' %}
+                                {% else %}{% trans 'board priority high' %}{% endif %}
+                              </span>
+                              <span class="
+                                {% if task.progress <= 30 %}
+                                  progress-low
+                                {% elif task.progress <= 70 %}
+                                  progress-middle
+                                {% else %}
+                                  progress-high
+                                {% endif %}
+                              ">
+                                {{ task.progress }} %
+                              </span>
+                            </div>
                         </div>
                     </li>
                 {% empty %}
@@ -106,7 +140,24 @@
                                 {{ task.description | truncatechars:20 }}
                             </div>
                             <div class="spacer"></div>
-                            <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">{% if task.priority == "LOW" %}{% trans 'borad priority low' %}{% elif task.priority == "MIDDLE" %}{% trans 'borad priority middle' %}{% else %}{% trans 'board priority high' %}{% endif %}</span>
+                            <div class="board-item-status-row">
+                              <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">
+                                {% if task.priority == "LOW" %}{% trans 'borad priority low' %}
+                                {% elif task.priority == "MIDDLE" %}{% trans 'borad priority middle' %}
+                                {% else %}{% trans 'board priority high' %}{% endif %}
+                              </span>
+                              <span class="
+                                {% if task.progress <= 30 %}
+                                  progress-low
+                                {% elif task.progress <= 70 %}
+                                  progress-middle
+                                {% else %}
+                                  progress-high
+                                {% endif %}
+                              ">
+                                {{ task.progress }} %
+                              </span>
+                            </div>
                         </div>
                     </li>
                 {% empty %}

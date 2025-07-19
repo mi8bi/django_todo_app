@@ -38,10 +38,13 @@ const getTaskStatusByElemId = (elemId) => {
   }
 };
 
-const updateTaskRequest = async (status, taskId) => {
+const updateTaskRequest = async (status, taskId, progress) => {
   const body = new URLSearchParams();
   body.append("taskId", taskId);
   body.append("status", status);
+  if (progress !== undefined) {
+    body.append("progress", progress);
+  }
   const request = new Request("update", {
     method: "POST",
     body: body,
@@ -52,6 +55,46 @@ const updateTaskRequest = async (status, taskId) => {
   });
 
   await fetch(request);
+
+  // --- 進捗率表示を即座に更新 ---
+  if (progress !== undefined) {
+    // D&Dで移動したli要素を取得
+    const item = document.querySelector(`li.board-item[value="${taskId}"]`);
+    if (item) {
+      // 進捗率表示のspanを探す
+      const progressSpan = item.querySelector(".progress-low, .progress-middle, .progress-high");
+      if (progressSpan) {
+        // クラスを更新
+        progressSpan.classList.remove("progress-low", "progress-middle", "progress-high");
+        if (progress <= 30) {
+          progressSpan.classList.add("progress-low");
+        } else if (progress <= 70) {
+          progressSpan.classList.add("progress-middle");
+        } else {
+          progressSpan.classList.add("progress-high");
+        }
+        // 表示値を更新
+        progressSpan.textContent = `${progress} %`;
+      }
+    }
+  }
+};
+
+const getNewProgress = (fromStatus, toStatus) => {
+  if (fromStatus === STATUS.notCompleted && toStatus === STATUS.progress) {
+    return 10;
+  }
+  if (fromStatus === STATUS.progress && toStatus === STATUS.completed) {
+    return 100;
+  }
+  if (fromStatus === STATUS.completed && (toStatus === STATUS.progress || toStatus === STATUS.notCompleted)) {
+    return 0;
+  }
+  if (fromStatus === STATUS.progress && toStatus === STATUS.notCompleted) {
+    return 0;
+  }
+  // それ以外は変更なし
+  return undefined;
 };
 
 if (notCompletedItems) {
@@ -69,7 +112,8 @@ if (notCompletedItems) {
       const toStatus = getTaskStatusByElemId(toElemId);
       if (fromStatus == toStatus) return;
 
-      updateTaskRequest(toStatus, taskId);
+      const newProgress = getNewProgress(fromStatus, toStatus);
+      updateTaskRequest(toStatus, taskId, newProgress);
     },
   });
 }
@@ -89,7 +133,8 @@ if (progressItems) {
       const toStatus = getTaskStatusByElemId(toElemId);
       if (fromStatus == toStatus) return;
 
-      updateTaskRequest(toStatus, taskId);
+      const newProgress = getNewProgress(fromStatus, toStatus);
+      updateTaskRequest(toStatus, taskId, newProgress);
     },
   });
 }
@@ -109,7 +154,8 @@ if (completedItems) {
       const toStatus = getTaskStatusByElemId(toElemId);
       if (fromStatus == toStatus) return;
 
-      updateTaskRequest(toStatus, taskId);
+      const newProgress = getNewProgress(fromStatus, toStatus);
+      updateTaskRequest(toStatus, taskId, newProgress);
     },
   });
 }

@@ -36,13 +36,21 @@ class BoardView(LoginRequiredMixin, TemplateView):
         return context
 
     def post(self, request):
-        # TODO: バリデーションチェック
         task_id = request.POST.get("taskId", "")
         status = request.POST.get("status", models.Status.NOT_COMPLETED)
+        progress = request.POST.get("progress", None)
+
+        update_fields = {"status": status}
+        if progress is not None:
+            try:
+                update_fields["progress"] = int(progress)
+            except ValueError:
+                pass
+
         is_updated = (
             models.Task.objects.filter(user=self.request.user)
             .filter(id__exact=task_id)
-            .update(status=status)
+            .update(**update_fields)
         )
 
         if is_updated:
