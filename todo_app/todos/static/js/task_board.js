@@ -97,13 +97,51 @@ const getNewProgress = (fromStatus, toStatus) => {
   return undefined;
 };
 
-if (notCompletedItems) {
-  new Sortable(notCompletedItems, {
+function removeDummyItem(list) {
+  const dummy = list.querySelector('.dummy-item');
+  if (dummy) dummy.remove();
+}
+
+function updateDummyItem(list) {
+  const dummy = list.querySelector('.dummy-item');
+  const items = list.querySelectorAll('.board-item:not(.dummy-item)');
+  if (items.length > 0) {
+    // タスクが1件以上ならdummy-itemを削除
+    if (dummy) dummy.remove();
+  } else {
+    // タスクが0件ならdummy-itemがなければ追加
+    if (!dummy) {
+      const li = document.createElement('li');
+      li.className = 'board-item dummy-item';
+      li.setAttribute('value', '');
+      li.style.minHeight = '48px';
+      li.style.opacity = '0';
+      li.style.pointerEvents = 'auto';
+      li.innerHTML = `
+        <div class="handle">
+          <img src="/static/images/grip-vertical.svg" alt="handle">
+        </div>
+        <div class="v-line"></div>
+        <div class="board-item-content">
+          <div class="board-item-title"></div>
+          <div class="board-item-description"></div>
+          <div class="spacer"></div>
+        </div>
+      `;
+      list.appendChild(li);
+    }
+  }
+}
+
+// 各リストのSortable初期化時にonAdd/onRemove/onUpdateで呼び出す
+['not-completed-items', 'progress-items', 'completed-items'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  new Sortable(el, {
     group: "shared",
-    animation: 150,
-    handle: ".handle",
+    animation: 50,
     ghostClass: "blue-background-class",
-    sort: false,
+    sort: true,
     onEnd: (e) => {
       const fromElemId = e.from.id;
       const toElemId = e.to.id;
@@ -115,47 +153,18 @@ if (notCompletedItems) {
       const newProgress = getNewProgress(fromStatus, toStatus);
       updateTaskRequest(toStatus, taskId, newProgress);
     },
-  });
-}
-
-if (progressItems) {
-  new Sortable(progressItems, {
-    group: "shared",
-    animation: 150,
-    handle: ".handle",
-    ghostClass: "blue-background-class",
-    sort: false,
-    onEnd: (e) => {
-      const fromElemId = e.from.id;
-      const toElemId = e.to.id;
-      const taskId = e.item.value;
-      const fromStatus = getTaskStatusByElemId(fromElemId);
-      const toStatus = getTaskStatusByElemId(toElemId);
-      if (fromStatus == toStatus) return;
-
-      const newProgress = getNewProgress(fromStatus, toStatus);
-      updateTaskRequest(toStatus, taskId, newProgress);
+    onAdd: function (evt) {
+      removeDummyItem(evt.to);
+      updateDummyItem(evt.to);
+      updateDummyItem(evt.from);
+    },
+    onRemove: function (evt) {
+      updateDummyItem(evt.from);
+      updateDummyItem(evt.to);
+    },
+    onUpdate: function (evt) {
+      updateDummyItem(evt.from);
+      updateDummyItem(evt.to);
     },
   });
-}
-
-if (completedItems) {
-  new Sortable(completedItems, {
-    group: "shared",
-    animation: 150,
-    handle: ".handle",
-    ghostClass: "blue-background-class",
-    sort: false,
-    onEnd: (e) => {
-      const fromElemId = e.from.id;
-      const toElemId = e.to.id;
-      const taskId = e.item.value;
-      const fromStatus = getTaskStatusByElemId(fromElemId);
-      const toStatus = getTaskStatusByElemId(toElemId);
-      if (fromStatus == toStatus) return;
-
-      const newProgress = getNewProgress(fromStatus, toStatus);
-      updateTaskRequest(toStatus, taskId, newProgress);
-    },
-  });
-}
+});
