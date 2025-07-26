@@ -14,6 +14,8 @@ from django.views.generic.edit import (
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from . import forms, models
+from .models import Category
+from .forms import CategoryForm
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -34,13 +36,21 @@ class BoardView(LoginRequiredMixin, TemplateView):
         return context
 
     def post(self, request):
-        # TODO: バリデーションチェック
         task_id = request.POST.get("taskId", "")
         status = request.POST.get("status", models.Status.NOT_COMPLETED)
+        progress = request.POST.get("progress", None)
+
+        update_fields = {"status": status}
+        if progress is not None:
+            try:
+                update_fields["progress"] = int(progress)
+            except ValueError:
+                pass
+
         is_updated = (
             models.Task.objects.filter(user=self.request.user)
             .filter(id__exact=task_id)
-            .update(status=status)
+            .update(**update_fields)
         )
 
         if is_updated:
@@ -160,20 +170,30 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         next_page = self.request.GET.get("next_page", "1")
-        return f"{reverse("todos:task_list")}?page={next_page}"
+        return f"{reverse('todos:task_list')}?page={next_page}"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["default_cancel_url"] = reverse_lazy("todos:task_list")
+        return context
 
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = models.Task
-    form_class = forms.TaskForm
+    form_class = forms.TaskUpdateForm
     template_name_suffix = "_update_form"
 
-    # TODO: formがinvalidateしたときに画面遷移が意図通りにいかない
     def get_success_url(self):
         referer_url = self.request.POST.get("referer-url", "")
         if referer_url:
             return referer_url
         return reverse("todos:task_list")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        next_url = self.request.GET.get("next")
+        context["default_cancel_url"] = next_url or reverse_lazy("todos:task_list")
+        return context
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
@@ -193,3 +213,36 @@ class TaskCategoryJsonView(LoginRequiredMixin, View):
             for task in tasks
         ]
         return JsonResponse(task_categories, safe=False)
+
+
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+    template_name = "todos/category_list.html"
+    context_object_name = "categories"
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user).order_by("-created_at")
+
+
+class CategoryCreateView(LoginRequiredMixin, CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = "todos/category_add_form.html"
+    success_url = reverse_lazy("todos:category_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class CategoryEditView(LoginRequiredMixin, UpdateView):
+    model = Category
+    fields = ["title"]
+    template_name = "todos/category_edit_form.html"
+    success_url = reverse_lazy("todos:category_list")
+
+
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
+    model = Category
+    template_name = "todos/category_confirm_delete.html"
+    success_url = reverse_lazy("todos:category_list")

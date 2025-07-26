@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-22 17:15+0900\n"
+"POT-Creation-Date: 2025-07-26 17:37+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr "ログイン"
 msgid "login submit"
 msgstr "ログイン"
 
-#: todo_app/accounts/templates/login.html:25
+#: todo_app/accounts/templates/login.html:26
 msgid "Sign up here"
 msgstr "新規登録"
 
@@ -100,7 +100,7 @@ msgstr "登録"
 msgid "signup form errors"
 msgstr "入力にエラーがあります。"
 
-#: todo_app/accounts/templates/signup.html:38
+#: todo_app/accounts/templates/signup.html:39
 msgid "Login Page"
 msgstr "ログイン"
 
@@ -116,7 +116,7 @@ msgstr "アカウントが有効化されていません。メール認証を完
 msgid "This email address is already in use."
 msgstr "このユーザー名は既に使用されています。"
 
-#: todo_app/accounts/views.py:141
+#: todo_app/accounts/views.py:140
 msgid "No account was found with this email address."
 msgstr "このメールアドレスに紐づくアカウントは見つかりませんでした。"
 
@@ -132,65 +132,65 @@ msgstr ""
 msgid "model category title"
 msgstr "タイトル"
 
-#: todo_app/todos/models.py:17
+#: todo_app/todos/models.py:18
 #: todo_app/todos/templates/todos/task_list.html:135
 msgid "priority low"
 msgstr "低"
 
-#: todo_app/todos/models.py:18
+#: todo_app/todos/models.py:19
 #: todo_app/todos/templates/todos/task_list.html:135
 msgid "priority middle"
 msgstr "中"
 
-#: todo_app/todos/models.py:19
+#: todo_app/todos/models.py:20
 #: todo_app/todos/templates/todos/task_list.html:135
 msgid "priority high"
 msgstr "高"
 
-#: todo_app/todos/models.py:23
+#: todo_app/todos/models.py:24
 #: todo_app/todos/templates/todos/task_list.html:132
 msgid "status not completed"
 msgstr "未完了"
 
-#: todo_app/todos/models.py:24
+#: todo_app/todos/models.py:25
 #: todo_app/todos/templates/todos/task_list.html:132
 msgid "status progress"
 msgstr "進行中"
 
-#: todo_app/todos/models.py:25
+#: todo_app/todos/models.py:26
 #: todo_app/todos/templates/todos/task_list.html:132
 msgid "status completed"
 msgstr "完了"
 
-#: todo_app/todos/models.py:29
+#: todo_app/todos/models.py:30
 msgid "model task title"
 msgstr "タイトル"
 
-#: todo_app/todos/models.py:32
+#: todo_app/todos/models.py:33
 msgid "model task progress"
 msgstr "進捗率"
 
-#: todo_app/todos/models.py:39
+#: todo_app/todos/models.py:40
 msgid "model task status"
 msgstr "ステータス"
 
-#: todo_app/todos/models.py:45
+#: todo_app/todos/models.py:46
 msgid "model task priority"
 msgstr "優先度"
 
-#: todo_app/todos/models.py:52
+#: todo_app/todos/models.py:53
 msgid "model task category"
 msgstr "カテゴリー"
 
-#: todo_app/todos/models.py:54
+#: todo_app/todos/models.py:55
 msgid "model task description"
 msgstr "説明"
 
-#: todo_app/todos/models.py:58
+#: todo_app/todos/models.py:59
 msgid "model task start_date"
 msgstr "開始予定日"
 
-#: todo_app/todos/models.py:61
+#: todo_app/todos/models.py:62
 msgid "model task due_date"
 msgstr "締切日"
 
@@ -199,20 +199,75 @@ msgid "menu home"
 msgstr "ホーム"
 
 #: todo_app/todos/templates/header.html:8
+msgid "menu category"
+msgstr "カテゴリー"
+
+#: todo_app/todos/templates/header.html:9
 msgid "menu task"
 msgstr "タスク一覧"
 
-#: todo_app/todos/templates/header.html:9
+#: todo_app/todos/templates/header.html:10
 msgid "menu board"
 msgstr "ボード"
 
-#: todo_app/todos/templates/header.html:10
+#: todo_app/todos/templates/header.html:11
 msgid "menu gantt"
 msgstr "ガントチャート"
 
-#: todo_app/todos/templates/header.html:36
+#: todo_app/todos/templates/header.html:37
 msgid "logout"
 msgstr "ログアウト"
+
+#: todo_app/todos/templates/todos/category_add_form.html:5
+#: todo_app/todos/templates/todos/category_add_form.html:17
+msgid "category add title"
+msgstr "カテゴリー追加"
+
+#: todo_app/todos/templates/todos/category_add_form.html:33
+#: todo_app/todos/templates/todos/category_list.html:18
+msgid "category add"
+msgstr "追加"
+
+#: todo_app/todos/templates/todos/category_add_form.html:34
+#: todo_app/todos/templates/todos/category_confirm_delete.html:28
+#: todo_app/todos/templates/todos/category_edit_form.html:34
+msgid "cancel"
+msgstr "キャンセル"
+
+#: todo_app/todos/templates/todos/category_confirm_delete.html:5
+#: todo_app/todos/templates/todos/category_confirm_delete.html:17
+#: todo_app/todos/templates/todos/category_confirm_delete.html:27
+#: todo_app/todos/templates/todos/category_list.html:26
+msgid "delete"
+msgstr "削除"
+
+#: todo_app/todos/templates/todos/category_confirm_delete.html:22
+#, python-format
+msgid ""
+"\n"
+"          Are you sure you want to delete the category \"<strong>%(title)s</"
+"strong>\"?\n"
+"        "
+msgstr ""
+"\n"
+"          本当にカテゴリ「<strong>%(title)s</strong>」を削除しますか？\n"
+"        "
+
+#: todo_app/todos/templates/todos/category_edit_form.html:5
+#: todo_app/todos/templates/todos/category_edit_form.html:17
+#: todo_app/todos/templates/todos/category_edit_form.html:33
+#: todo_app/todos/templates/todos/category_list.html:25
+msgid "edit"
+msgstr "編集"
+
+#: todo_app/todos/templates/todos/category_list.html:5
+#: todo_app/todos/templates/todos/category_list.html:17
+msgid "category list title"
+msgstr "カテゴリー一覧"
+
+#: todo_app/todos/templates/todos/category_list.html:30
+msgid "no categories"
+msgstr "タイトル"
 
 #: todo_app/todos/templates/todos/home.html:7
 msgid "home title page"
@@ -222,19 +277,19 @@ msgstr "ホーム"
 msgid "home graph title"
 msgstr "タスク"
 
-#: todo_app/todos/templates/todos/task_add_form.html:7
+#: todo_app/todos/templates/todos/task_add_form.html:6
 msgid "task add title page"
 msgstr "新規タスク"
 
-#: todo_app/todos/templates/todos/task_add_form.html:16
+#: todo_app/todos/templates/todos/task_add_form.html:15
 msgid "task add title"
 msgstr "新規タスク"
 
-#: todo_app/todos/templates/todos/task_add_form.html:59
+#: todo_app/todos/templates/todos/task_add_form.html:82
 msgid "add submit btn"
 msgstr "追加"
 
-#: todo_app/todos/templates/todos/task_add_form.html:60
+#: todo_app/todos/templates/todos/task_add_form.html:83
 msgid "add cancel btn"
 msgstr "キャンセル"
 
@@ -246,29 +301,29 @@ msgstr "ボード"
 msgid "board not-completed title"
 msgstr "未完了"
 
-#: todo_app/todos/templates/todos/task_board.html:35
-#: todo_app/todos/templates/todos/task_board.html:57
-#: todo_app/todos/templates/todos/task_board.html:79
+#: todo_app/todos/templates/todos/task_board.html:39
+#: todo_app/todos/templates/todos/task_board.html:92
+#: todo_app/todos/templates/todos/task_board.html:145
 msgid "borad priority low"
 msgstr "優先度:低"
 
-#: todo_app/todos/templates/todos/task_board.html:35
-#: todo_app/todos/templates/todos/task_board.html:57
-#: todo_app/todos/templates/todos/task_board.html:79
+#: todo_app/todos/templates/todos/task_board.html:40
+#: todo_app/todos/templates/todos/task_board.html:93
+#: todo_app/todos/templates/todos/task_board.html:146
 msgid "borad priority middle"
 msgstr "優先度:中"
 
-#: todo_app/todos/templates/todos/task_board.html:35
-#: todo_app/todos/templates/todos/task_board.html:57
-#: todo_app/todos/templates/todos/task_board.html:79
+#: todo_app/todos/templates/todos/task_board.html:41
+#: todo_app/todos/templates/todos/task_board.html:94
+#: todo_app/todos/templates/todos/task_board.html:147
 msgid "board priority high"
 msgstr "優先度:高"
 
-#: todo_app/todos/templates/todos/task_board.html:42
+#: todo_app/todos/templates/todos/task_board.html:73
 msgid "board progress title"
 msgstr "進行中"
 
-#: todo_app/todos/templates/todos/task_board.html:64
+#: todo_app/todos/templates/todos/task_board.html:126
 msgid "board completed title"
 msgstr "完了"
 
@@ -349,11 +404,11 @@ msgstr "締切日"
 msgid "column delete"
 msgstr "削除"
 
-#: todo_app/todos/templates/todos/task_list.html:175
+#: todo_app/todos/templates/todos/task_list.html:187
 msgid "new task btn"
 msgstr "新規タスク"
 
-#: todo_app/todos/templates/todos/task_list.html:176
+#: todo_app/todos/templates/todos/task_list.html:188
 msgid "delete all btn"
 msgstr "全削除"
 

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'category list title' %}{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+<link rel="stylesheet" href="{% static 'css/category_form.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "header.html" %}
+<main>
+  <div class="list-container">
+    <div class="list-header">
+      <h2 class="list-title">{% trans 'category list title' %}</h2>
+      <a href="{% url 'todos:category_add' %}" class="btn btn-primary">{% trans 'category add' %}</a>
+    </div>
+    <ul class="item-list">
+      {% for category in categories %}
+        <li class="item">
+          <span class="item-title">{{ category.title }}</span>
+          <div class="item-actions">
+            <a href="{% url 'todos:category_edit' category.pk %}" class="btn btn-sm">{% trans 'edit' %}</a>
+            <a href="{% url 'todos:category_delete' category.pk %}" class="btn btn-sm btn-danger">{% trans 'delete' %}</a>
+          </div>
+        </li>
+      {% empty %}
+        <li class="item-empty">{% trans 'no categories' %}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</main>
+{% endblock %}

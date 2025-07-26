@@ -128,17 +128,36 @@
                             <input class="checks" type="checkbox" name="tasks" value="{{ task.pk }}">
                         </td>
                         <td
-                            data-href="{% url 'todos:task_update' task.pk %}">
+                            data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">
                             <span class="{% if task.status == 'COMPLETED' %}completed{% elif task.status == 'PROGRESS' %}progress{% else %}not-completed{% endif %}">{% if task.status == "COMPLETED" %}{% trans 'status completed' %}{% elif task.status == "PROGRESS" %}{% trans 'status progress' %}{% else %}{% trans 'status not completed' %}{% endif %}</span></td>
                         <td
-                            data-href="{% url 'todos:task_update' task.pk %}">
+                            data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">
                             <span class="{% if task.priority == 'LOW' %}low{% elif task.priority == 'MIDDLE' %}middle{% else %}high{% endif %}">{% if task.priority == "LOW" %}{% trans 'priority low' %}{% elif task.priority == "MIDDLE" %}{% trans 'priority middle' %}{% else %}{% trans 'priority high' %}{% endif %}</span></td>
-                        <td data-href="{% url 'todos:task_update' task.pk %}">{{ task.progress }} %</td>
-                        <td class="left" data-href="{% url 'todos:task_update' task.pk %}">{{ task.title | truncatechars:20 }}</td>
-                        <td data-href="{% url 'todos:task_update' task.pk %}">{{ task.category }}</td>
-                        <td class="left" data-href="{% url 'todos:task_update' task.pk %}">{{ task.description | truncatechars:20 }}</td>
-                        <td data-href="{% url 'todos:task_update' task.pk %}">{{ task.start_date }}</td>
-                        <td data-href="{% url 'todos:task_update' task.pk %}">{{ task.due_date }}</td>
+                        <td data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">
+                          <span class="
+                            {% if task.progress <= 30 %}
+                              progress-low
+                            {% elif task.progress <= 70 %}
+                              progress-middle
+                            {% else %}
+                              progress-high
+                            {% endif %}
+                          ">
+                            {{ task.progress }} %
+                          </span>
+                        </td>
+                        <td class="left" data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">{{ task.title | truncatechars:20 }}</td>
+                        <td data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">
+                          {{ task.category.title|default:"なし" }}
+                        </td>
+                        <td class="left" data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">{{ task.description | truncatechars:20 }}</td>
+                        <td data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">
+                          {{ task.start_date|date:"Y-m-d" }}
+                        </td>
+                        <td data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}"
+                            class="{% if task.due_date and task.due_date.date < today.date %}overdue{% endif %}">
+                          {{ task.due_date|date:"Y-m-d" }}
+                        </td>
                         <td class="actions">
                             <div class="delete">
                                 <a href="{% url 'todos:task_delete' task.pk %}"><img
