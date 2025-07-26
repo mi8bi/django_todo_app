@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-19 21:48+0900\n"
+"POT-Creation-Date: 2025-07-26 17:37+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,32 +218,52 @@ msgstr "ガントチャート"
 msgid "logout"
 msgstr "ログアウト"
 
-#: todo_app/todos/templates/todos/category_form.html:4
-#: todo_app/todos/templates/todos/category_form.html:9
+#: todo_app/todos/templates/todos/category_add_form.html:5
+#: todo_app/todos/templates/todos/category_add_form.html:17
 msgid "category add title"
 msgstr "カテゴリー追加"
 
-#: todo_app/todos/templates/todos/category_form.html:23
+#: todo_app/todos/templates/todos/category_add_form.html:33
 #: todo_app/todos/templates/todos/category_list.html:18
 msgid "category add"
 msgstr "追加"
 
-#: todo_app/todos/templates/todos/category_form.html:24
+#: todo_app/todos/templates/todos/category_add_form.html:34
+#: todo_app/todos/templates/todos/category_confirm_delete.html:28
+#: todo_app/todos/templates/todos/category_edit_form.html:34
 msgid "cancel"
 msgstr "キャンセル"
+
+#: todo_app/todos/templates/todos/category_confirm_delete.html:5
+#: todo_app/todos/templates/todos/category_confirm_delete.html:17
+#: todo_app/todos/templates/todos/category_confirm_delete.html:27
+#: todo_app/todos/templates/todos/category_list.html:26
+msgid "delete"
+msgstr "削除"
+
+#: todo_app/todos/templates/todos/category_confirm_delete.html:22
+#, python-format
+msgid ""
+"\n"
+"          Are you sure you want to delete the category \"<strong>%(title)s</"
+"strong>\"?\n"
+"        "
+msgstr ""
+"\n"
+"          本当にカテゴリ「<strong>%(title)s</strong>」を削除しますか？\n"
+"        "
+
+#: todo_app/todos/templates/todos/category_edit_form.html:5
+#: todo_app/todos/templates/todos/category_edit_form.html:17
+#: todo_app/todos/templates/todos/category_edit_form.html:33
+#: todo_app/todos/templates/todos/category_list.html:25
+msgid "edit"
+msgstr "編集"
 
 #: todo_app/todos/templates/todos/category_list.html:5
 #: todo_app/todos/templates/todos/category_list.html:17
 msgid "category list title"
 msgstr "カテゴリー一覧"
-
-#: todo_app/todos/templates/todos/category_list.html:25
-msgid "edit"
-msgstr "編集"
-
-#: todo_app/todos/templates/todos/category_list.html:26
-msgid "delete"
-msgstr "削除"
 
 #: todo_app/todos/templates/todos/category_list.html:30
 msgid "no categories"
@@ -281,29 +301,29 @@ msgstr "ボード"
 msgid "board not-completed title"
 msgstr "未完了"
 
-#: todo_app/todos/templates/todos/task_board.html:37
-#: todo_app/todos/templates/todos/task_board.html:73
-#: todo_app/todos/templates/todos/task_board.html:109
+#: todo_app/todos/templates/todos/task_board.html:39
+#: todo_app/todos/templates/todos/task_board.html:92
+#: todo_app/todos/templates/todos/task_board.html:145
 msgid "borad priority low"
 msgstr "優先度:低"
 
-#: todo_app/todos/templates/todos/task_board.html:37
-#: todo_app/todos/templates/todos/task_board.html:73
-#: todo_app/todos/templates/todos/task_board.html:109
+#: todo_app/todos/templates/todos/task_board.html:40
+#: todo_app/todos/templates/todos/task_board.html:93
+#: todo_app/todos/templates/todos/task_board.html:146
 msgid "borad priority middle"
 msgstr "優先度:中"
 
-#: todo_app/todos/templates/todos/task_board.html:37
-#: todo_app/todos/templates/todos/task_board.html:73
-#: todo_app/todos/templates/todos/task_board.html:109
+#: todo_app/todos/templates/todos/task_board.html:41
+#: todo_app/todos/templates/todos/task_board.html:94
+#: todo_app/todos/templates/todos/task_board.html:147
 msgid "board priority high"
 msgstr "優先度:高"
 
-#: todo_app/todos/templates/todos/task_board.html:56
+#: todo_app/todos/templates/todos/task_board.html:73
 msgid "board progress title"
 msgstr "進行中"
 
-#: todo_app/todos/templates/todos/task_board.html:92
+#: todo_app/todos/templates/todos/task_board.html:126
 msgid "board completed title"
 msgstr "完了"
 
@@ -384,11 +404,11 @@ msgstr "締切日"
 msgid "column delete"
 msgstr "削除"
 
-#: todo_app/todos/templates/todos/task_list.html:175
+#: todo_app/todos/templates/todos/task_list.html:187
 msgid "new task btn"
 msgstr "新規タスク"
 
-#: todo_app/todos/templates/todos/task_list.html:176
+#: todo_app/todos/templates/todos/task_list.html:188
 msgid "delete all btn"
 msgstr "全削除"
 
