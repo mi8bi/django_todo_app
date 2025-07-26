@@ -297,3 +297,8 @@ input[type="checkbox"] {
 .pagination a:hover:not(.active) {
     background-color: #ddd;
 }
+
+.overdue {
+    color: red;
+    font-weight: bold;
+}

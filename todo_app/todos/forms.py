@@ -54,7 +54,7 @@ class TaskForm(forms.ModelForm):
         cleaned_data = super().clean()
         start_date = cleaned_data.get("start_date")
         due_date = cleaned_data.get("due_date")
-        if start_date and due_date and not start_date < due_date:
+        if start_date and due_date and start_date > due_date:
             raise ValidationError("The scheduled start date is past the deadline.")
         return cleaned_data
 

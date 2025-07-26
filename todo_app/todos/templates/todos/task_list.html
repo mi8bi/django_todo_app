@@ -151,8 +151,13 @@
                           {{ task.category.title|default:"なし" }}
                         </td>
                         <td class="left" data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">{{ task.description | truncatechars:20 }}</td>
-                        <td data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">{{ task.start_date }}</td>
-                        <td data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">{{ task.due_date }}</td>
+                        <td data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}">
+                          {{ task.start_date|date:"Y-m-d" }}
+                        </td>
+                        <td data-href="{% url 'todos:task_update' task.pk %}?next={{ request.get_full_path }}"
+                            class="{% if task.due_date and task.due_date.date < today.date %}overdue{% endif %}">
+                          {{ task.due_date|date:"Y-m-d" }}
+                        </td>
                         <td class="actions">
                             <div class="delete">
                                 <a href="{% url 'todos:task_delete' task.pk %}"><img
