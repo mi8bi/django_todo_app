@@ -8,4 +8,8 @@ services:
       python manage.py makemessages -l ja
       python manage.py compilemessages
       python manage.py collectstatic --noinput
-    startCommand: gunicorn todo_app.wsgi:application
+    startCommand: |
+      python manage.py migrate
+      python manage.py create_demo_user --username demo_user --password demo123456
+      python manage.py check_demo_user
+      gunicorn todo_app.wsgi:application
