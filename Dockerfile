@@ -26,4 +26,5 @@ WORKDIR /app/todo_app
 
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# 開発環境用 - runserverを使用
+CMD ["sh", "-c", "python manage.py migrate && python manage.py create_demo_user && python manage.py runserver 0.0.0.0:8000"]
