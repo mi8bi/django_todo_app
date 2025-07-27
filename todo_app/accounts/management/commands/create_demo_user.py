@@ -1,6 +1,5 @@
 """
-Django management command to create demo user with sample data
-Place this file at: todo_app/accounts/management/commands/create_demo_user.py
+Optimized Django management command for fast demo user creation
 """
 import os
 from django.core.management.base import BaseCommand
@@ -8,50 +7,30 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from datetime import timedelta
 from todos.models import Category, Task, Priority, Status
+from django.db import transaction
 
 
 class Command(BaseCommand):
-    help = 'Create demo user with sample tasks and categories'
-
+    help = 'Create demo user with sample data (optimized for fast startup)'
+    
     def add_arguments(self, parser):
-        parser.add_argument(
-            '--username',
-            type=str,
-            default='demo_user',
-            help='Username for demo user (default: demo_user)',
-        )
-        parser.add_argument(
-            '--password',
-            type=str,
-            default='demo123456',
-            help='Password for demo user (default: demo123456)',
-        )
-        parser.add_argument(
-            '--email',
-            type=str,
-            default='demo@example.com',
-            help='Email for demo user (default: demo@example.com)',
-        )
+        parser.add_argument('--skip-sample-data', action='store_true', 
+                          help='Only create user, skip sample tasks')
 
+    @transaction.atomic
     def handle(self, *args, **options):
-        username = options['username']
-        password = options['password']
-        email = options['email']
+        verbosity = options.get('verbosity', 1)
+        skip_sample = options.get('skip_sample_data', False)
+        
+        username = 'demo_user'
+        password = 'demo123456'
+        email = 'demo@example.com'
 
-        self.stdout.write(f"Creating/checking demo user: {username}")
-
-        # Create or get demo user
+        # Fast user creation/update
         try:
             user = User.objects.get(username=username)
-            self.stdout.write(f"Demo user already exists: {username}")
-
-            # Always reset password to ensure it's correct
-            user.set_password(password)
-            user.is_active = True
-            user.email = email
-            user.save()
-            self.stdout.write("Updated demo user password and settings")
-
+            if verbosity > 0:
+                self.stdout.write(f"Demo user exists: {username}")
         except User.DoesNotExist:
             user = User.objects.create_user(
                 username=username,
@@ -61,161 +40,79 @@ class Command(BaseCommand):
                 first_name='Demo',
                 last_name='User'
             )
-            self.stdout.write(f"Successfully created demo user: {username}")
+            if verbosity > 0:
+                self.stdout.write(f"Created demo user: {username}")
 
-        # Verify the user can authenticate
-        from django.contrib.auth import authenticate
-        auth_user = authenticate(username=username, password=password)
-        if auth_user is not None:
-            self.stdout.write("✅ Demo user authentication verified")
-        else:
-            self.stdout.write("❌ Demo user authentication failed")
-            # Try to fix it
-            user.set_password(password)
-            user.save()
-            auth_user = authenticate(username=username, password=password)
-            if auth_user is not None:
-                self.stdout.write("✅ Demo user authentication fixed")
-            else:
-                self.stdout.write("❌ Demo user authentication still failing")
+        # Always ensure password is correct
+        user.set_password(password)
+        user.is_active = True
+        user.save()
 
-        # Create sample categories if they don't exist
-        categories_data = [
-            'Work Projects',
-            'Personal Tasks', 
-            'Learning & Development',
-            'Health & Fitness',
-            'Home & Family'
-        ]
+        # Skip sample data creation if requested or if data already exists
+        if skip_sample or Task.objects.filter(user=user).exists():
+            if verbosity > 0:
+                self.stdout.write("Skipping sample data creation")
+            return
+
+        # Fast sample data creation
+        self._create_minimal_sample_data(user, verbosity)
+
+    def _create_minimal_sample_data(self, user, verbosity):
+        """Create minimal sample data for demo purposes"""
+        now = timezone.now()
         
+        # Create minimal categories
         categories = []
-        for cat_title in categories_data:
-            category, created = Category.objects.get_or_create(
-                title=cat_title,
-                user=user,
-                defaults={'title': cat_title}
-            )
-            categories.append(category)
-            if created:
-                self.stdout.write(f'Created category: {cat_title}')
-
-        # Create sample tasks if user has no tasks
-        if not Task.objects.filter(user=user).exists():
-            now = timezone.now()
-            sample_tasks = [
-                {
-                    'title': 'Complete Django Todo App Documentation',
-                    'description': 'Finish writing comprehensive documentation for the todo application including API docs and user guide.',
-                    'category': categories[0],  # Work Projects
-                    'priority': Priority.HIGH,
-                    'status': Status.PROGRESS,
-                    'progress': 75,
-                    'start_date': now - timedelta(days=3),
-                    'due_date': now + timedelta(days=2),
-                },
-                {
-                    'title': 'Review and Merge Pull Requests',
-                    'description': 'Review pending pull requests from team members and merge approved changes.',
-                    'category': categories[0],  # Work Projects
-                    'priority': Priority.MIDDLE,
-                    'status': Status.NOT_COMPLETED,
-                    'progress': 0,
-                    'start_date': now,
-                    'due_date': now + timedelta(days=1),
-                },
-                {
-                    'title': 'Plan Weekend Trip',
-                    'description': 'Research destinations, book accommodation, and plan activities for the weekend getaway.',
-                    'category': categories[1],  # Personal Tasks
-                    'priority': Priority.LOW,
-                    'status': Status.NOT_COMPLETED,
-                    'progress': 20,
-                    'start_date': now,
-                    'due_date': now + timedelta(days=7),
-                },
-                {
-                    'title': 'Learn React Hooks',
-                    'description': 'Complete online course on React Hooks and build a sample project to practice.',
-                    'category': categories[2],  # Learning & Development
-                    'priority': Priority.MIDDLE,
-                    'status': Status.PROGRESS,
-                    'progress': 45,
-                    'start_date': now - timedelta(days=7),
-                    'due_date': now + timedelta(days=14),
-                },
-                {
-                    'title': 'Morning Workout Routine',
-                    'description': 'Establish a consistent morning workout routine with cardio and strength training.',
-                    'category': categories[3],  # Health & Fitness
-                    'priority': Priority.HIGH,
-                    'status': Status.PROGRESS,
-                    'progress': 60,
-                    'start_date': now - timedelta(days=14),
-                    'due_date': now + timedelta(days=30),
-                },
-                {
-                    'title': 'Organize Home Office',
-                    'description': 'Declutter and reorganize the home office space for better productivity.',
-                    'category': categories[4],  # Home & Family
-                    'priority': Priority.LOW,
-                    'status': Status.COMPLETED,
-                    'progress': 100,
-                    'start_date': now - timedelta(days=10),
-                    'due_date': now - timedelta(days=2),
-                },
-                {
-                    'title': 'Update Resume and LinkedIn',
-                    'description': 'Update professional profiles with recent projects and achievements.',
-                    'category': categories[0],  # Work Projects
-                    'priority': Priority.MIDDLE,
-                    'status': Status.NOT_COMPLETED,
-                    'progress': 10,
-                    'start_date': now + timedelta(days=1),
-                    'due_date': now + timedelta(days=5),
-                },
-                {
-                    'title': 'Read "Clean Code" Book',
-                    'description': 'Read and take notes on Robert Martin\'s Clean Code principles.',
-                    'category': categories[2],  # Learning & Development
-                    'priority': Priority.LOW,
-                    'status': Status.PROGRESS,
-                    'progress': 30,
-                    'start_date': now - timedelta(days=5),
-                    'due_date': now + timedelta(days=21),
-                },
-            ]
-
-            for task_data in sample_tasks:
-                task = Task.objects.create(
-                    user=user,
-                    **task_data
-                )
-                self.stdout.write(f'Created task: {task.title}')
-
-            self.stdout.write(
-                self.style.SUCCESS(
-                    f'Successfully created {len(sample_tasks)} sample tasks for demo user'
-                )
-            )
-        else:
-            self.stdout.write(
-                self.style.WARNING(
-                    'Demo user already has tasks, skipping sample data creation'
-                )
-            )
-
-        # Display summary
-        task_count = Task.objects.filter(user=user).count()
-        category_count = Category.objects.filter(user=user).count()
+        cat_names = ['Work', 'Personal', 'Learning']
         
-        self.stdout.write(
-            self.style.SUCCESS(
-                f'\n--- Demo User Setup Complete ---\n'
-                f'Username: {username}\n'
-                f'Password: {password}\n'
-                f'Email: {email}\n'
-                f'Categories: {category_count}\n'
-                f'Tasks: {task_count}\n'
-                f'Demo URL: {os.environ.get("RENDER_EXTERNAL_URL", "http://localhost:8000")}'
+        for name in cat_names:
+            cat, created = Category.objects.get_or_create(
+                title=name, 
+                user=user,
+                defaults={'title': name}
             )
-        )
+            categories.append(cat)
+
+        # Create minimal sample tasks
+        tasks_data = [
+            {
+                'title': 'Complete Django Documentation',
+                'category': categories[0],
+                'priority': Priority.HIGH,
+                'status': Status.PROGRESS,
+                'progress': 75,
+                'start_date': now - timedelta(days=2),
+                'due_date': now + timedelta(days=1),
+                'description': 'Finish Django app documentation'
+            },
+            {
+                'title': 'Plan Weekend Activities',
+                'category': categories[1],
+                'priority': Priority.LOW,
+                'status': Status.NOT_COMPLETED,
+                'progress': 0,
+                'start_date': now,
+                'due_date': now + timedelta(days=3),
+                'description': 'Plan activities for the weekend'
+            },
+            {
+                'title': 'Learn React Basics',
+                'category': categories[2],
+                'priority': Priority.MIDDLE,
+                'status': Status.COMPLETED,
+                'progress': 100,
+                'start_date': now - timedelta(days=7),
+                'due_date': now - timedelta(days=1),
+                'description': 'Complete React fundamentals course'
+            },
+        ]
+
+        # Bulk create tasks for better performance
+        tasks_to_create = [
+            Task(user=user, **task_data) for task_data in tasks_data
+        ]
+        Task.objects.bulk_create(tasks_to_create, ignore_conflicts=True)
+
+        if verbosity > 0:
+            self.stdout.write(f"Created {len(tasks_data)} sample tasks")
+            self.stdout.write("Demo user setup complete")

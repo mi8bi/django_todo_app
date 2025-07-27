@@ -2,14 +2,21 @@ services:
   - type: web
     name: django-todo-app
     env: python
+    plan: free
     buildCommand: |
-      pip install -r requirements.txt
-      python manage.py makemessages -l en
-      python manage.py makemessages -l ja
-      python manage.py compilemessages
-      python manage.py collectstatic --noinput
+      pip install --upgrade pip --no-cache-dir
+      pip install --no-cache-dir -r requirements.txt
+      python manage.py collectstatic --noinput --verbosity 0
+      python manage.py makemessages -l en --verbosity 0 || echo "Messages creation skipped"
+      python manage.py makemessages -l ja --verbosity 0 || echo "Messages creation skipped"
+      python manage.py compilemessages --verbosity 0 || echo "Messages compilation skipped"
     startCommand: |
-      python manage.py migrate
-      python manage.py create_demo_user --username demo_user --password demo123456
-      python manage.py check_demo_user
-      gunicorn todo_app.wsgi:application
+      chmod +x startup_monitor.sh && ./startup_monitor.sh
+    healthCheckPath: /accounts/login/
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: 1
+      - key: PYTHONDONTWRITEBYTECODE  
+        value: 1
+      - key: RENDER
+        value: true

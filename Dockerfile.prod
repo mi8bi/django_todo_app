@@ -5,28 +5,31 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
+# システムの依存関係をインストール（キャッシュ効率化）
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     git \
     gettext \
     libmariadb-dev-compat \
     libmariadb-dev \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# requirements.txt を先にコピーして依存をインストール（レイヤーキャッシュ活用）
 COPY requirements.txt .
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip --no-cache-dir && \
+    pip install --no-cache-dir -r requirements.txt
 
+# プロジェクト全体をコピー
 COPY . .
 
 WORKDIR /app/todo_app
 
-# 静的ファイル・翻訳ファイルのビルド
-RUN python manage.py collectstatic --noinput
-RUN python manage.py compilemessages
+# 静的ファイル・翻訳ファイルのビルド（起動時ではなくビルド時に実行）
+RUN python manage.py collectstatic --noinput --verbosity 0
+RUN python manage.py compilemessages --verbosity 0
 
 EXPOSE 8000
 
-# 本番はgunicorn推奨
-# マイグレーション実行後にデモユーザーとサンプルデータを作成
-CMD ["sh", "-c", "python manage.py migrate && python manage.py create_demo_user --username demo_user --password demo123456 && python manage.py check_demo_user && gunicorn todo_app.wsgi:application --bind 0.0.0.0:8000"]
+# 軽量化された起動コマンド（並列実行とログ削減）
+CMD ["sh", "-c", "python manage.py migrate --run-syncdb --verbosity 0 && python manage.py create_demo_user --verbosity 0 && exec gunicorn todo_app.wsgi:application --bind 0.0.0.0:8000 --workers 2 --timeout 30 --keep-alive 2 --max-requests 1000"]
