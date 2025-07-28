@@ -17,9 +17,11 @@
 
 <main class="gantt-main">
     <div class="gantt-controls">
-        <button id="gantt-view-day">Day</button>
-        <button id="gantt-view-week">Week</button>
-        <button id="gantt-view-month">Month</button>
+        <select id="gantt-view-mode">
+            <option value="Day">Day</option>
+            <option value="Week" selected>Week</option>
+            <option value="Month">Month</option>
+        </select>
     </div>
     <div id="gantt">
     </div>
