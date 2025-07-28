@@ -4,11 +4,11 @@
 
 <header>
     <ul>
-        <li><a href="{% url 'todos:home' %}">{% trans 'menu home' %}</a></li>
-        <li><a href="{% url 'todos:category_list' %}">{% trans 'menu category' %}</a></li>
-        <li><a href="{% url 'todos:task_list' %}">{% trans 'menu task' %}</a></li>
-        <li><a href="{% url 'todos:board' %}">{% trans 'menu board' %}</a></li>
-        <li><a href="{% url 'todos:gantt' %}">{% trans 'menu gantt' %}</a></li>
+        <li class="{% if request.path == '/todos/home/' %}active{% endif %}"><a href="{% url 'todos:home' %}">{% trans 'menu home' %}</a></li>
+        <li class="{% if 'category' in request.path %}active{% endif %}"><a href="{% url 'todos:category_list' %}">{% trans 'menu category' %}</a></li>
+        <li class="{% if 'task' in request.path %}active{% endif %}"><a href="{% url 'todos:task_list' %}">{% trans 'menu task' %}</a></li>
+        <li class="{% if request.path == '/todos/board/' %}active{% endif %}"><a href="{% url 'todos:board' %}">{% trans 'menu board' %}</a></li>
+        <li class="{% if request.path == '/todos/gantt/' %}active{% endif %}"><a href="{% url 'todos:gantt' %}">{% trans 'menu gantt' %}</a></li>
     </ul>
 
     <div class="right-menu">
