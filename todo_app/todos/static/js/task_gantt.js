@@ -59,4 +59,16 @@ window.onload = async () => {
       console.log(`${task.name}: change progress to ${progress}%`);
     },
   });
+
+  document.getElementById('gantt-view-day').addEventListener('click', () => {
+    gantt.change_view_mode('Day');
+  });
+
+  document.getElementById('gantt-view-week').addEventListener('click', () => {
+    gantt.change_view_mode('Week');
+  });
+
+  document.getElementById('gantt-view-month').addEventListener('click', () => {
+    gantt.change_view_mode('Month');
+  });
 };
