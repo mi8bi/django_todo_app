@@ -59,10 +59,6 @@ window.onload = async () => {
       console.log(`${task.name}: change progress to ${progress}%`);
     },
     view_mode: 'Week',
-  });
-
-  const viewModeSelect = document.getElementById('gantt-view-mode');
-  viewModeSelect.addEventListener('change', () => {
-    gantt.change_view_mode(viewModeSelect.value);
+    side_header: true,
   });
 };
