@@ -119,8 +119,9 @@ class TaskListView(LoginRequiredMixin, FormMixin, ListView):
         context["order"] = self.request.GET.get("order", "asc")
         context["today"] = now()
         # 検索
+        search_params = self.request.session.get("search_params", {})
         context["search_form"] = forms.TaskSearchForm(
-            self.request.session.get("search_params", {})
+            user=self.request.user, initial=search_params
         )
         return context
 
@@ -159,6 +160,11 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     template_name_suffix = "_add_form"
     success_url = reverse_lazy("todos:task_list")
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
@@ -182,6 +188,11 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = models.Task
     form_class = forms.TaskUpdateForm
     template_name_suffix = "_update_form"
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
 
     def get_success_url(self):
         referer_url = self.request.POST.get("referer-url", "")
@@ -241,8 +252,14 @@ class CategoryEditView(LoginRequiredMixin, UpdateView):
     template_name = "todos/category_edit_form.html"
     success_url = reverse_lazy("todos:category_list")
 
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
+
 
 class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
     template_name = "todos/category_confirm_delete.html"
     success_url = reverse_lazy("todos:category_list")
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
