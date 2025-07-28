@@ -5,23 +5,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     {% block stylesheet %} {% endblock %}
     <title>{% block title %}{% endblock %}</title>
-    <style>
-        @media (max-width: 768px) {
-            body {
-                display: none;
-            }
-            html::after {
-                content: "This application is for PC only.";
-                display: block;
-                text-align: center;
-                font-size: 20px;
-                padding: 50px;
-            }
-        }
-    </style>
 </head>
 
 <body>
