@@ -9,12 +9,13 @@
 {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'css/frappe-gantt.css' %}">
 <link rel="stylesheet" href="{% static 'css/header.css' %}">
+<link rel="stylesheet" href="{% static 'css/gantt_custom.css' %}">
 {% endblock %}
 
 {% block content %}
 {% include "header.html" %}
 
-<main>
+<main class="gantt-main">
     <div id="gantt">
     </div>
 </main>
