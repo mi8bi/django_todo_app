@@ -1,0 +1,17 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f5f5f5;
+    color: #333;
+}
+
+.gantt-main {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+#gantt {
+    width: 1200px;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+}

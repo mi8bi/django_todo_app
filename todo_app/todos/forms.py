@@ -29,7 +29,10 @@ class TaskForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
+        if user:
+            self.fields["category"].queryset = Category.objects.filter(user=user)
         self.fields["category"].required = True
 
     def clean_start_date(self):
@@ -65,7 +68,10 @@ class TaskSearchForm(forms.ModelForm):
         fields = ["title", "category", "status", "priority"]
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
         super(TaskSearchForm, self).__init__(*args, **kwargs)
+        if user:
+            self.fields["category"].queryset = Category.objects.filter(user=user)
         self.fields["title"].required = False
         self.fields["category"].required = False
         self.fields["status"].required = False
