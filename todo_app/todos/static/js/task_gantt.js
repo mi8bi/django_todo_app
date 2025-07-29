@@ -58,7 +58,8 @@ window.onload = async () => {
     on_progress_change: (task, progress) => {
       console.log(`${task.name}: change progress to ${progress}%`);
     },
-    view_mode: 'Week',
+    language: "ja",
+    view_mode_select: true,
     side_header: true,
   });
 };
