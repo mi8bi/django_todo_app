@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://github.com/mi8bi/django_todo_app">
+    <img src="./assets/ogp.png" width="600" alt="OGP Image">
+  </a>
+</p>
+
 # Django Todo App
 
 A full-featured task management application built with Django, featuring user authentication, internationalization, and multiple project views including Kanban board and Gantt charts.
