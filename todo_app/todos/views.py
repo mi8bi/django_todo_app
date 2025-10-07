@@ -1,21 +1,21 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.timezone import now
 from django.views import View
 from django.views.generic import TemplateView
-from django.views.generic.list import ListView
 from django.views.generic.edit import (
     CreateView,
-    UpdateView,
     DeleteView,
     FormMixin,
+    UpdateView,
 )
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.list import ListView
 
 from . import forms, models
-from .models import Category
 from .forms import CategoryForm
+from .models import Category
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -31,8 +31,10 @@ class BoardView(LoginRequiredMixin, TemplateView):
         context["notCompletedTasks"] = query_set.filter(
             status=models.Status.NOT_COMPLETED
         )
-        context["progressTasks"] = query_set.filter(status=models.Status.PROGRESS)
-        context["completedTasks"] = query_set.filter(status=models.Status.COMPLETED)
+        context["progressTasks"] = query_set.filter(
+            status=models.Status.PROGRESS)
+        context["completedTasks"] = query_set.filter(
+            status=models.Status.COMPLETED)
         return context
 
     def post(self, request):
@@ -203,7 +205,8 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         next_url = self.request.GET.get("next")
-        context["default_cancel_url"] = next_url or reverse_lazy("todos:task_list")
+        context["default_cancel_url"] = next_url or reverse_lazy(
+            "todos:task_list")
         return context
 
 
