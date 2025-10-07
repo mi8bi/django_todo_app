@@ -7,7 +7,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -16,30 +15,119 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255, verbose_name='model category title')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='categories', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(
+                        max_length=255, verbose_name="model category title"
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="categories",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Task',
+            name="Task",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200, verbose_name='model task title')),
-                ('progress', models.IntegerField(default=0, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], verbose_name='model task progress')),
-                ('status', models.CharField(choices=[('NOT_COMPLETED', 'status not completed'), ('PROGRESS', 'status progress'), ('COMPLETED', 'status completed')], default='NOT_COMPLETED', max_length=50, verbose_name='model task status')),
-                ('priority', models.CharField(choices=[('LOW', 'priority low'), ('MIDDLE', 'priority middle'), ('HIGH', 'priority high')], default='LOW', max_length=10, verbose_name='model task priority')),
-                ('description', models.TextField(blank=True, verbose_name='model task description')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('start_date', models.DateTimeField(verbose_name='model task start_date')),
-                ('due_date', models.DateTimeField(verbose_name='model task due_date')),
-                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='todos.category', verbose_name='model task category')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(
+                        max_length=200, verbose_name="model task title"),
+                ),
+                (
+                    "progress",
+                    models.IntegerField(
+                        default=0,
+                        validators=[
+                            django.core.validators.MinValueValidator(0),
+                            django.core.validators.MaxValueValidator(100),
+                        ],
+                        verbose_name="model task progress",
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("NOT_COMPLETED", "status not completed"),
+                            ("PROGRESS", "status progress"),
+                            ("COMPLETED", "status completed"),
+                        ],
+                        default="NOT_COMPLETED",
+                        max_length=50,
+                        verbose_name="model task status",
+                    ),
+                ),
+                (
+                    "priority",
+                    models.CharField(
+                        choices=[
+                            ("LOW", "priority low"),
+                            ("MIDDLE", "priority middle"),
+                            ("HIGH", "priority high"),
+                        ],
+                        default="LOW",
+                        max_length=10,
+                        verbose_name="model task priority",
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True, verbose_name="model task description"),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "start_date",
+                    models.DateTimeField(verbose_name="model task start_date"),
+                ),
+                ("due_date", models.DateTimeField(
+                    verbose_name="model task due_date")),
+                (
+                    "category",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="todos.category",
+                        verbose_name="model task category",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

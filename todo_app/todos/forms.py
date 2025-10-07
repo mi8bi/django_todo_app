@@ -1,8 +1,10 @@
+from datetime import date, timedelta
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.timezone import now
-from datetime import date, timedelta
-from .models import Task, Category
+
+from .models import Category, Task
 
 
 class TaskForm(forms.ModelForm):
@@ -19,7 +21,9 @@ class TaskForm(forms.ModelForm):
             "priority",
         ]
         widgets = {
-            "progress": forms.Select(choices=[(i, f"{i} %") for i in range(0, 101, 10)]),
+            "progress": forms.Select(
+                choices=[(i, f"{i} %") for i in range(0, 101, 10)]
+            ),
             "start_date": forms.DateInput(
                 attrs={"type": "date", "min": date.today().isoformat()}
             ),
@@ -32,7 +36,8 @@ class TaskForm(forms.ModelForm):
         user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
         if user:
-            self.fields["category"].queryset = Category.objects.filter(user=user)
+            self.fields["category"].queryset = Category.objects.filter(
+                user=user)
         self.fields["category"].required = True
 
     def clean_start_date(self):
@@ -58,7 +63,8 @@ class TaskForm(forms.ModelForm):
         start_date = cleaned_data.get("start_date")
         due_date = cleaned_data.get("due_date")
         if start_date and due_date and start_date > due_date:
-            raise ValidationError("The scheduled start date is past the deadline.")
+            raise ValidationError(
+                "The scheduled start date is past the deadline.")
         return cleaned_data
 
 
@@ -71,7 +77,8 @@ class TaskSearchForm(forms.ModelForm):
         user = kwargs.pop("user", None)
         super(TaskSearchForm, self).__init__(*args, **kwargs)
         if user:
-            self.fields["category"].queryset = Category.objects.filter(user=user)
+            self.fields["category"].queryset = Category.objects.filter(
+                user=user)
         self.fields["title"].required = False
         self.fields["category"].required = False
         self.fields["status"].required = False
@@ -88,9 +95,7 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ["title"]
-        widgets = {
-            "title": forms.TextInput(attrs={"placeholder": "カテゴリ名"})
-        }
+        widgets = {"title": forms.TextInput(attrs={"placeholder": "カテゴリ名"})}
 
 
 class TaskUpdateForm(TaskForm):

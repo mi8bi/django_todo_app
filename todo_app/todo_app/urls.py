@@ -15,11 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.contrib import admin
-from django.conf.urls.i18n import i18n_patterns
-from django.urls import include, path
-from django.shortcuts import redirect
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
+from django.contrib import admin
+from django.shortcuts import redirect
+from django.urls import include, path
 
 
 def root_redirect(request):
@@ -29,11 +29,7 @@ def root_redirect(request):
 urlpatterns = i18n_patterns(
     path("", root_redirect, name="root_redirect"),
     # 本番環境(RENDER=true)ではadminを非表示
-    *(
-        [path("admin/", admin.site.urls)]
-        if settings.DEBUG
-        else []
-    ),
+    *([path("admin/", admin.site.urls)] if settings.DEBUG else []),
     path("accounts/", include("accounts.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
     path("todos/", include("todos.urls")),

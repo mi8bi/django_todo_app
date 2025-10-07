@@ -1,12 +1,14 @@
-from django.db import models
 from django.contrib.auth.models import User
-from django.utils.translation import gettext_lazy as _
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=255, verbose_name=_("model category title"))
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="categories")
+    title = models.CharField(
+        max_length=255, verbose_name=_("model category title"))
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="categories")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -52,7 +54,8 @@ class Task(models.Model):
         blank=True,
         verbose_name=_("model task category"),
     )
-    description = models.TextField(blank=True, verbose_name=_("model task description"))
+    description = models.TextField(
+        blank=True, verbose_name=_("model task description"))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     start_date = models.DateTimeField(

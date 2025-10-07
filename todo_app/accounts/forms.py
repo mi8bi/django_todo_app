@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
 
 class LoginForm(AuthenticationForm):
@@ -9,14 +9,16 @@ class LoginForm(AuthenticationForm):
         label="UserName",
         max_length=100,
         widget=forms.TextInput(
-            attrs={"id": "username", "placeholder": _("login username placeholder")}
+            attrs={"id": "username", "placeholder": _(
+                "login username placeholder")}
         ),
     )
     password = forms.CharField(
         label="Password",
         max_length=20,
         widget=forms.PasswordInput(
-            attrs={"id": "password", "placeholder": _("login password placeholder")}
+            attrs={"id": "password", "placeholder": _(
+                "login password placeholder")}
         ),
     )
 
@@ -26,20 +28,27 @@ class SignUpForm(forms.ModelForm):
         label="UserName",
         max_length=100,
         widget=forms.TextInput(
-            attrs={"id": "signup-username", "placeholder": _("signup username placeholder")}
+            attrs={
+                "id": "signup-username",
+                "placeholder": _("signup username placeholder"),
+            }
         ),
     )
     email = forms.EmailField(
         label="Email",
         widget=forms.EmailInput(
-            attrs={"id": "signup-email", "placeholder": _("signup email placeholder")}
+            attrs={"id": "signup-email",
+                   "placeholder": _("signup email placeholder")}
         ),
     )
     password = forms.CharField(
         label="Password",
         max_length=20,
         widget=forms.PasswordInput(
-            attrs={"id": "signup-password", "placeholder": _("signup password placeholder")}
+            attrs={
+                "id": "signup-password",
+                "placeholder": _("signup password placeholder"),
+            }
         ),
     )
 
@@ -51,5 +60,10 @@ class SignUpForm(forms.ModelForm):
 class ResendVerificationEmailForm(forms.Form):
     email = forms.EmailField(
         label=_("Email address"),
-        widget=forms.EmailInput(attrs={"class": "form-control", "placeholder": _("Enter your email address")})
+        widget=forms.EmailInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": _("Enter your email address"),
+            }
+        ),
     )
